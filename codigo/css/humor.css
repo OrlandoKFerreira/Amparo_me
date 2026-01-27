@@ -1,0 +1,146 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.page {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px 16px 40px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.pergunta-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 16px 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.pergunta-texto {
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.opcoes {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.emoji-btn {
+  flex: 1;
+  min-width: 52px;
+  border-radius: 10px;
+  padding: 6px 4px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease,
+    background 0.1s ease;
+  font-size: 0.75rem;
+}
+
+.emoji-btn .emoji {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.emoji-btn .valor {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.emoji-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-color: #bbb;
+}
+
+.emoji-btn.selecionado {
+  background: #e6f4ff;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 1px rgba(26, 115, 232, 0.2);
+}
+
+.emoji-btn.selecionado .valor {
+  opacity: 1;
+  font-weight: 600;
+  color: #1a73e8;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-submit {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #1a73e8;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(26, 115, 232, 0.45);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+
+.status {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  min-height: 18px;
+}
+
+.status.ok {
+  color: #0f9d58;
+}
+
+.status.error {
+  color: #d93025;
+}
+
+.status.info {
+  color: #555;
+}

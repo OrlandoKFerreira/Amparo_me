@@ -1,0 +1,209 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Caixa central do artigo */
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Cabeçalho do ARTIGO (dentro do main) */
+.artigo-header {
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* botão de voltar à esquerda */
+  gap: 0.75rem;
+}
+
+.artigo-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  color: #222;
+}
+
+.artigo-header p {
+  margin: 0;
+  font-size: 1rem;
+  margin-top: 5px;
+  color: #555;
+  text-align: center;
+  width: 100%;
+}
+
+/* Imagem principal do artigo */
+.imgArtigo {
+  max-width: 50%;
+  height: auto;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.post-principal::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Conteúdo sugerido */
+.conteudo-sugerido {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.conteudo-sugerido h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Grid de sugestões */
+.grade-sugestoes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.cartao {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.cartao img {
+  max-width: 70%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.cartao h3 {
+  margin: 10px 0 5px 0;
+  font-size: 1.1em;
+}
+
+.cartao p {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.cartao-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cartao-link:hover .cartao {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Botão de voltar */
+.btn-voltar {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.btn-voltar:hover {
+  background-color: #e0e0e0;
+}
+.artigo-reacoes-texto {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.artigo-acoes {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Editar / Excluir */
+.acoes-primarias a,
+.acoes-primarias button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.acoes-primarias .btn-perigo {
+  background: #ffe5e5;
+  border-color: #f5a5a5;
+}
+
+/* Botões de reação */
+.artigo-reacoes-botoes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-reacao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #f3f3f3;
+  cursor: pointer;
+}
+
+.btn-reacao span {
+  font-weight: 600;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .grade-sugestoes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .imgArtigo {
+    max-width: 100%;
+    float: none;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .grade-sugestoes {
+    grid-template-columns: 1fr;
+  }
+}

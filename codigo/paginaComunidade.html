@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/comunidade.css">
+    <title>Amparo.Me</title>
+</head>
+<body>
+    <header>
+      <img src="img/logo.png" alt="Amparo.Me" width="200px" />
+      <nav>
+        <a href="PaginaInicial.html" title="Pagina inicial">
+          <i class="fa-solid fa-house-chimney"></i>
+        </a>
+        <a href="pagina_perfil.html" title="Meu Perfil"
+          ><i class="fa-solid fa-user"></i>
+        </a>
+      </nav>
+    </header>
+    <main>
+        <div class="banner" id="banner">
+            <img src="https://placehold.co/200x200" id="banner-image">
+            <div>
+                <h1 id="banner-title"></h1>
+                <h3 id="banner-tags"></h3>
+            </div>
+            <a href="" id="edit-community">
+                <i class="fa-solid fa-pencil"></i>
+            </a>
+        </div>
+        <div class="group-content">
+            <aside>
+                <p id="community-description"></p>
+                <a class="home-button" href="PaginaInicial.html">
+                    <i class="fa-solid fa-house-chimney"></i>
+                    <p>Home</p>
+                </a>
+                <h2>Pesquisar</h2>
+                <input type="text" id="search-community" oninput="searchCommunity(event.target.value)">
+                <h2>Minhas comunidades</h2>
+                <div id="community-list">
+                </div>
+                <a href="cadastroComunidade.html" id="btn-novacom">Criar nova Comunidade</a>
+            </aside>
+            <div>
+                <div id="post-list"></div>
+            </div>
+        </div>
+    </main>
+    <script src="js/comunidade.js"></script>
+    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
+</body>
+</html>

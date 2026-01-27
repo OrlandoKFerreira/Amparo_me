@@ -1,0 +1,180 @@
+/* Layout geral */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+/* HEADER */
+.site-header {
+  background: #d3d3d3;
+  padding: 0.75rem 2rem;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.header-actions .circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #b3b3b3;
+}
+
+/* AREA PRINCIPAL */
+.cadastro-layout {
+  min-height: calc(100vh - 140px); /* ajusta com o header/footer */
+  display: flex;
+  flex-direction: column;
+}
+
+/* bloco cinza “meio da página” do wireframe */
+.cadastro-hero {
+  background: #d3d3d3;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cadastro-container {
+  max-width: 1100px;
+  width: 100%;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 2rem;
+}
+
+/* avatar à esquerda */
+.avatar-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+/* CARD DE CADASTRO */
+.cadastro-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cadastro-card h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+.cadastro-subtitle {
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* FORM */
+.cadastro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.55rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #444;
+}
+
+/* Botão principal */
+.btn-primario {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background: #333;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-primario:hover {
+  background: #000;
+}
+
+/* FOOTER */
+.site-footer {
+  background: #d3d3d3;
+  padding: 1rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-weight: 600;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .cadastro-container {
+    grid-template-columns: 1fr;
+  }
+
+  .avatar-placeholder {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+}

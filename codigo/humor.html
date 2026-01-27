@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro de Humor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/humor.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h1>Como você está hoje?</h1>
+      <p class="subtitle">
+        Clique no emoji que melhor representa seu humor em cada pergunta.
+      </p>
+
+      <form id="humor-form">
+        <div id="perguntas-container"></div>
+
+        <p id="status" class="status"></p>
+
+        <div class="botoes-humor">
+          <!-- botão padrão de salvar (primeira resposta do dia) -->
+          <button type="submit" class="btn-salvar">Salvar</button>
+
+          <!-- botão de próximo (mostrado quando já respondeu hoje) -->
+          <button
+            type="button"
+            id="btn-proximo"
+            class="btn-proximo"
+            style="display: none"
+          >
+            Próximo
+          </button>
+        </div>
+      </form>
+    </div>
+    <script src="js/humor.js"></script>
+  </body>
+</html>

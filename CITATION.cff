@@ -1,0 +1,33 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: "Amparo.me — Plataforma de Apoio à Saúde Mental"
+authors:
+  - family-names: Lima
+    given-names: Cesar Lacerda
+  - family-names: Cordeiro
+    given-names: Gabriel Katahira
+  - family-names: Ferreira
+    given-names: Orlando Kelvin
+  - family-names: Ragonezi
+    given-names: Sávio Furlan Pessoa
+  - family-names: Silva Tavares
+    given-names: Cleiton
+    name-suffix: Professor
+    affiliation: PUC Minas
+  - family-names: Costa Silva
+    given-names: Luiz Henrique
+    name-suffix: Professor
+    affiliation: PUC Minas
+keywords:
+  - saúde mental
+  - comunidade
+  - apoio emocional
+  - diário pessoal
+  - artigos curados
+  - interação social
+repository-code: https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2025-2-ti1-5567100-amparo-me.git
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2025-12-10
+
+

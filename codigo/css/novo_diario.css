@@ -1,0 +1,151 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS PARA A PÁGINA NOVO DIÁRIO
+   ========================================= */
+
+/* Redefine o container para layout lateral (duas colunas) */
+.profile-container.layout-novo-diario {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+/* --- COLUNA ESQUERDA (Sidebar) --- */
+.sidebar-left {
+    width: 200px; /* Largura reduzida (era 280px) para diminuir os espaços laterais */
+    background-color: #fafdfb;
+    border-right: 1px solid var(--cor-borda-suave);
+    padding: 25px 15px;
+    
+    /* Centralização total */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza itens horizontalmente no eixo flex */
+    text-align: center;  /* Garante que textos fiquem centralizados */
+    flex-shrink: 0;
+}
+
+.sidebar-left .profile-pic {
+    width: 100px; /* Imagem levemente menor para harmonizar com a largura reduzida */
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 50%; /* Garante que fique redonda, se desejar */
+    object-fit: cover;
+}
+
+.sidebar-left h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.1em;
+    color: var(--cor-texto-principal);
+}
+
+/* Wrapper da Data - Garante a centralização pedida */
+.date-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o input e o label */
+}
+
+.date-wrapper label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--cor-texto-secundario);
+    font-size: 0.85em;
+}
+
+/* Ajuste no input de data para ele não ficar largo demais */
+.date-wrapper input[type="date"] {
+    width: 90%; /* Ocupa quase toda a largura da sidebar */
+    text-align: center;
+}
+
+/* --- COLUNA DIREITA (Conteúdo) --- */
+.content-right {
+    flex-grow: 1; /* Ocupa todo o espaço restante (Prioridade para o texto) */
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Evita que o flex item estoure */
+}
+
+.right-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--cor-borda-suave);
+}
+
+.right-header h3 {
+    margin: 0;
+    color: var(--cor-texto-principal);
+    font-size: 1.1em;
+}
+
+/* Formulário e Área de Texto */
+#formDiario {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.form-group-text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.diary-edit-area {
+    flex-grow: 1;
+    resize: none;
+    height: 100%;
+    min-height: 250px; /* Altura mínima garantida */
+    padding: 12px;
+}
+
+/* Botões */
+.entry-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* --- RESPONSIVIDADE (Mobile) --- */
+@media (max-width: 600px) {
+    .profile-container.layout-novo-diario {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .sidebar-left {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--cor-borda-suave);
+        flex-direction: row; /* No celular, foto e data lado a lado */
+        justify-content: space-around;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .sidebar-left .profile-pic {
+        width: 60px;
+        height: 60px;
+        margin: 0;
+    }
+    
+    .sidebar-left h2 {
+        margin: 0 10px;
+        font-size: 1em;
+    }
+    
+    .date-wrapper {
+        width: auto;
+        align-items: flex-start;
+    }
+}

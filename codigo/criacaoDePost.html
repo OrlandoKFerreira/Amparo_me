@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publicar</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="css/criacaoPost.css" />
+  </head>
+  <body>
+    <header class="cp-header">
+      <img src="img/logo.png" alt="Amparo.Me" width="200px" />
+      <nav>
+        <a href="PaginaInicial.html" title="Pagina inicial">
+          <i class="fa-solid fa-house-chimney"></i>
+        </a>
+        <a href="pagina_perfil.html" title="Meu Perfil"
+          ><i class="fa-solid fa-user"></i>
+        </a>
+      </nav>
+    </header>
+    <main class="cp">
+      <h1 class="cp-title">Publicar</h1>
+      <div class="cp-comunidade">
+        <label for="comunidade"> Escolha a comunidade</label>
+        <select id="comunidade">
+          <option value="">Escolha a comunidade</option>
+          <!-- as opções reais virão do JSON via JS -->
+        </select>
+      </div>
+      <section class="cp-box">
+        <div class="cp-campo">
+          <label for="titulo"> Titulo</label>
+          <input
+            id="titulo"
+            type="text"
+            placeholder="Digite o titulo da publicacao"
+          />
+        </div>
+        <div class="cp-campo">
+          <label for="categoria">Categoria</label>
+          <select id="categoria">
+            <option>Ansiedade</option>
+            <option>Saude Mental</option>
+            <option>Autoestima</option>
+          </select>
+        </div>
+        <div class="cp-abas">
+          <button
+            class="cp-aba"
+            data-tab="texto"
+            role="tab"
+            aria-selected="true"
+          >
+            Texto
+          </button>
+          <button
+            class="cp-aba"
+            data-tab="imagem"
+            role="tab"
+            aria-selected="false"
+          >
+            Imagem
+          </button>
+          <button
+            class="cp-aba"
+            data-tab="link"
+            role="tab"
+            aria-selected="false"
+          >
+            link
+          </button>
+        </div>
+        <div
+          class="cp-panel"
+          data-panel="texto"
+          role="region"
+          aria-label="Conteúdo em texto"
+        >
+          <textarea
+            id="cp-texto"
+            rows="8"
+            placeholder="Escreva aqui o conteúdo do seu post..."
+          ></textarea>
+        </div>
+
+        <div
+          class="cp-panel cp-hidden"
+          data-panel="imagem"
+          role="region"
+          aria-label="URL da imagem"
+        >
+          <label class="cp-label" for="cp-imagem">URL da imagem</label>
+          <input
+            type="url"
+            id="cp-imagem"
+            placeholder="https://exemplo.com/minha-imagem.jpg"
+          />
+          <div class="cp-preview" id="cp-preview"></div>
+        </div>
+
+        <div
+          class="cp-panel cp-hidden"
+          data-panel="link"
+          role="region"
+          aria-label="Compartilhar link"
+        >
+          <label class="cp-label" for="cp-url">Cole o link</label>
+          <input
+            type="url"
+            id="cp-url"
+            placeholder="https://exemplo.com/meu-artigo"
+          />
+        </div>
+        <div class="cp-acoes">
+          <button
+            type="button"
+            class="cp-btn cp-btn-secondary"
+            id="cp-descartar"
+          >
+            Descartar
+          </button>
+          <button type="button" class="cp-btn" id="cp-publicar">
+            Publicar post
+          </button>
+        </div>
+      </section>
+    </main>
+    <script src="js/criarPost.js"></script>
+    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
+  </body>
+</html>

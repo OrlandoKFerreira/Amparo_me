@@ -1,0 +1,624 @@
+/* =========================================
+   1. GERAL E VARIÁVEIS (Uso em todas as páginas)
+   ========================================= */
+:root {
+    --cor-fundo-pagina: #F7FCFA;
+    --cor-fundo-card: #FFFFFF;
+    --cor-borda-suave: #EAF4EE;
+    --cor-primaria-ativa: #82C09A;
+    --cor-secundaria-inativa: #B8D8D8; 
+    --cor-texto-principal: #3A4F41;
+    --cor-texto-secundario: #6A7B72;
+    --cor-botao-editar: #82C09A; 
+    --cor-botao-excluir: #E59898; 
+    --cor-botao-neutro: #EAF4EE;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo-pagina);
+    padding: 20px;
+    color: var(--cor-texto-principal);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.profile-container {
+    width: 100vw;
+    background-color: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Cabeçalho (Perfil e Menu) --- */
+.profile-header {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--cor-borda-suave);
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    background-color: var(--cor-borda-suave);
+    margin: 0 auto 15px auto;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.profile-header h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.main-nav button {
+    background-color: var(--cor-botao-neutro);
+    border: 1px solid var(--cor-borda-suave);
+    color: var(--cor-texto-secundario);
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.main-nav button:hover {
+    background-color: #dcece2;
+}
+
+.main-nav button.active {
+    background-color: var(--cor-primaria-ativa);
+    color: var(--cor-fundo-card);
+    border-color: var(--cor-primaria-ativa);
+}
+
+.content-area {
+    padding: 20px;
+    width: 50%;
+}
+
+/* =========================================
+   2. PÁGINA "MEU CONTEÚDO" (Grade e Cards)
+   ========================================= */
+
+/* O Grid Responsivo */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+    gap: 15px;
+    padding: 10px 0;
+}
+
+/* O Cartão Individual */
+.card-resumo {
+    background-color: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 8px;
+    padding: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    position: relative;
+}
+
+.card-resumo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-color: var(--cor-primaria-ativa);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--cor-botao-editar);
+    border-bottom: 1px solid var(--cor-borda-suave);
+    padding-bottom: 5px;
+}
+
+.card-preview {
+    background-color: var(--cor-fundo-pagina); 
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.75em;
+    color: var(--cor-texto-secundario);
+    flex-grow: 1;
+    line-height: 1.4;
+    
+    /* Efeito de reticências (...) para texto longo */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+/* O botão da lixeira */
+.btn-card-delete {
+    position: absolute;
+    bottom: 10px; /* Mudou de top para bottom */
+    right: 10px;
+    
+    background-color: #fff; /* Um fundo branco ajuda a destacar o vermelho */
+    border: 1px solid #ffebeb;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 6px 8px; /* Um pouco maior para facilitar o clique */
+    border-radius: 50%;
+    
+    color: #FF3333; /* Vermelho Vivo */
+    
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 10; 
+    
+    /* Opacidade inicial (invisível) conforme você pediu */
+    opacity: 0;
+    transform: translateY(10px); /* Efeito visual: ele "sobe" ao aparecer */
+}
+
+/* Ao passar o mouse no CARD, a lixeira aparece */
+.card-resumo:hover .btn-card-delete {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn-card-delete:hover {
+    background-color: #FF3333; /* Fica vermelho sólido */
+    color: white; /* Ícone vira branco */
+    transform: scale(1.1);
+}
+
+/* Ajuste do link para não cobrir o botão */
+.card-click-area {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+/* Rodapé (Novo do Wireframe) */
+.site-footer {
+    margin-top: auto;
+    padding: 20px;
+    border-top: 1px solid var(--cor-borda-suave);
+    text-align: center;
+    background-color: #fafafa;
+    border-radius: 0 0 8px 8px;
+}
+
+.site-footer h3 {
+    margin: 0 0 10px 0;
+    color: var(--cor-texto-principal);
+    font-size: 1em;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    font-size: 0.75em;
+}
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   7. ESTADO VAZIO 
+   ========================================= */
+.empty-state {
+    display: none; 
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 2px dashed var(--cor-borda-suave);
+    margin-top: 20px;
+    
+    /* ADIÇÕES PARA CENTRALIZAR O BOTÃO E CONTEÚDO */
+    display: none; /* Mantém escondido por padrão */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-state.visible {
+    display: flex; /* Muda para flex ao invés de block */
+    animation: fadeIn 0.5s;
+}
+
+.empty-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    display: block;
+    color: var(--cor-secundaria-inativa);
+}
+
+.empty-text {
+    color: var(--cor-texto-secundario);
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* =========================================
+   3. PÁGINA "PROGRESSO" (Abas, Diário, Humor)
+   ========================================= */
+
+.date {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--cor-texto-secundario);
+}
+
+/* Abas */
+.tab-nav {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: var(--cor-secundaria-inativa);
+    color: var(--cor-texto-principal);
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.tab-button:first-child {
+    margin-right: -1px;
+}
+
+.tab-button.active-tab {
+    background-color: var(--cor-primaria-ativa);
+    color: #ffffff;
+    border-color: var(--cor-primaria-ativa);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active-content {
+    display: block;
+}
+
+/* Diário */
+.diary-entry {
+    border: 1px solid var(--cor-borda-suave);
+    padding: 15px;
+    overflow-y: auto;
+    background-color: var(--cor-fundo-pagina);
+    line-height: 1.6;
+    border-radius: 8px;
+}
+
+.diary-edit-area {
+    width: 100%;
+    min-height: 150px;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    line-height: 1.6;
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 8px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+/* Humor */
+.mood-entry {
+    display: flex;
+    align-items: center;
+    background-color: var(--cor-fundo-pagina);
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.emoji {
+    font-size: 2.5em;
+    margin-right: 15px;
+    background-color: var(--cor-borda-suave);
+    padding: 5px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; 
+}
+
+.mood-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.mood-status {
+    font-size: 0.8em;
+    color: var(--cor-texto-secundario);
+    margin: 0 0 5px 0;
+}
+
+.mood-quote {
+    font-size: 1em;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Edição de Humor */
+.mood-edit-form {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.mood-edit-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 4px;
+}
+.mood-edit-emoji {
+    font-size: 1.5em !important;
+    width: 60px !important;
+    text-align: center;
+}
+
+/* Botões de Ação (Comuns) */
+.entry-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.mood-entry .entry-actions {
+    margin-top: 0;
+    margin-left: auto; 
+    padding-left: 10px;
+    flex-shrink: 0; 
+}
+
+.btn-action {
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* =========================================
+   5. BARRA DE AÇÕES
+   ========================================= */
+
+.action-bar {
+    display: flex;
+    justify-content: space-between; /* "Voltar" na esquerda, "Novo" na direita */
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--cor-borda-suave); /* Uma linha sutil para separar */
+}
+
+/* Se houver apenas um botão (na página inicial), ele vai para a direita sozinho */
+.action-bar.right-only {
+    justify-content: flex-end;
+}
+
+/* Estilo específico para o botão de Voltar (mais discreto) */
+.btn-back {
+    background-color: transparent;
+    color: var(--cor-texto-secundario);
+    border: 1px solid var(--cor-texto-secundario);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none; /* Caso seja um link <a> */
+}
+
+.btn-back:hover {
+    background-color: var(--cor-borda-suave);
+    color: var(--cor-texto-principal);
+}
+
+/* Estilo para o botão Novo Registro (Destaque) */
+.btn-new {
+    background-color: var(--cor-primaria-ativa);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-new:hover {
+    background-color: #6fa885; /* Um verde um pouco mais escuro */
+    transform: translateY(-1px);
+}
+
+.btn-action.btn-edit { background-color: var(--cor-botao-editar); }
+.btn-action.btn-delete { background-color: var(--cor-botao-excluir); }
+.btn-action.btn-add { background-color: var(--cor-botao-editar); padding: 8px 16px; font-size: 0.9em; }
+.add-entry-container { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post {
+    width: 50vw;
+    padding: 2vw;
+    background-color: #ddd;
+    border-radius: 10px;
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.post-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.post img {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.post-text h1 {
+    text-align: center;
+    margin: 30px 0 0 0;
+}
+.post-text p {
+  --lines: 2;
+  position: relative;
+  line-height: 1.4;
+  max-height: calc(1.4em * var(--lines));
+  overflow: hidden;
+
+}
+.post-meta {
+    color: #888;
+    text-align: center;
+}
+.post-text p::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.4em;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        #ddd 75%
+    );
+}
+.post-vote {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 2em;
+}
+.post-vote i {
+    cursor: pointer;
+}
+.post-link {
+    background-color: var(--cor-primaria-ativa);
+    color: var(--cor-texto-principal);
+    text-align: center;
+    padding: 1.2vw;
+    font-weight: 700;
+    margin-top: 50px;
+    border-radius: 20px;
+    width: 30%;
+    transition: .2s;
+    text-decoration: none;
+    font-family: inherit;
+}
+.post-link:hover {
+    background-color: #57967a;
+}
+.humor-resposta {
+    background-color: #ddd;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.humor-resposta h1{
+    font-size: 1.2em;
+}
+.humor-resposta h2 {
+    font-size: 1em;
+    margin: 0;
+}
+.humor-resposta p {
+    font-size: 1.4em;
+}
+
+/* =========================================
+   4. MOBILE / RESPONSIVIDADE
+   ========================================= */
+@media screen and (max-width: 550px) {
+
+    .main-nav {
+        display: flex;
+        flex-direction: column; 
+        align-items: stretch; 
+        gap: 8px; 
+    }
+
+    .main-nav button { margin: 0; }
+
+    .grid-container {
+        grid-template-columns: 1fr 1fr; 
+    }
+
+    .mood-entry {
+        flex-direction: column; 
+        align-items: center;  
+    }
+
+    .mood-entry .emoji { margin-right: 0; margin-bottom: 15px; }
+
+    .mood-text { text-align: center; align-items: center; }
+
+    .mood-entry .entry-actions {
+        margin-left: 0; padding-left: 0; margin-top: 20px;
+        justify-content: center; width: 100%;
+    }
+
+    .mood-entry .entry-actions .btn-action { flex: 1; text-align: center; }
+}

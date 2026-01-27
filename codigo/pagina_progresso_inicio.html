@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Progresso</title>
+    <link rel="stylesheet" href="css/pagina_progresso.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+     <!-- CABEÇALHO GLOBAL (mesmo das outras páginas do main) -->
+    <header class="site-header">
+      <img src="img/logo.png" alt="Amparo.Me" class="site-logo" />
+      <nav class="site-nav">
+        <a href="PaginaInicial.html" title="Pagina inicial">
+          <i class="fa-solid fa-house-chimney"></i>
+        </a>
+        <a href="pagina_perfil.html" title="Meu Perfil"
+          ><i class="fa-solid fa-user"></i>
+        </a>
+      </nav>
+    </header>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="img/img_perfil.png" alt="Foto de Perfil" class="profile-pic" id="profile-pic">
+            <h2 id="profile-name"></h2>
+            
+            <nav class="main-nav">
+                <button onclick="window.location.href='pagina_perfil.html'">Editar Perfil</button>
+                <button onclick="window.location.href='posts_usuario.html'">Meu Conteúdo</button>
+                <button class="active">Progresso</button>
+            </nav>
+        </div>
+
+        <main class="content-area">
+            
+            <div class="action-bar right-only">
+                <button class="btn-new" onclick="window.location.href='novo_diario.html'">
+                    <span>+</span> Novo Registro
+                </button>
+            </div>
+
+            <div class="grid-container" id="gridCards">
+                 
+            </div>
+
+            <div class="empty-state" id="msgVazio">
+                <span class="empty-icon">🍃</span>
+                <h3>Tudo limpo por aqui!</h3>
+                <p class="empty-text">Você não tem nenhum registro no momento.</p>
+                <button class="btn-new" onclick="window.location.href='novo_diario.html'">Começar agora</button>
+            </div>
+
+        </main>
+
+    </div>
+    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
+    <script src="js/pagina_progresso.js"></script>
+</body>
+</html>

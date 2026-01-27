@@ -1,0 +1,274 @@
+.section {
+  width: 100%;
+  text-align: center;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  border: 2px solid #000000;
+  padding: 20px;
+}
+
+.Card {
+  display: flex;
+  flex-direction: column; /* você já tinha row e depois column, deixei só column */
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 280px;
+  background-color: #f5f5f5;
+  padding: 1rem;
+}
+
+/* 🔹 CAIXA DA IMAGEM DENTRO DO CARD */
+.Card .media {
+  width: 100%;
+  max-width: 320px; /* largura máxima do card de imagem */
+  aspect-ratio: 4 / 3; /* proporção padrão (troque para 16 / 9 ou 1 / 1 se quiser) */
+  overflow: hidden; /* corta o excesso da imagem */
+  border-radius: 8px;
+}
+
+/* 🔹 IMAGEM COM PROPORÇÃO PADRÃO */
+.Card .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* mantém proporção e corta as sobras */
+  display: block;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.footerNav a {
+  padding: 6px;
+}
+/* ===== LAYOUT PRINCIPAL ===== */
+.layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  padding: 1.5rem 2rem;
+}
+
+/* Conteúdo principal ocupa o resto do espaço */
+.layout-content {
+  flex: 1;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 260px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Perfil na sidebar */
+.sidebar-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sidebar-username {
+  font-weight: 600;
+}
+
+/* Botão criar post */
+.btn-criar-post {
+  margin-top: 0.5rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background-color: #4a76e8;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.btn-criar-post:hover {
+  filter: brightness(0.9);
+}
+
+/* ===== LAYOUT COM SIDEBAR ===== */
+.layout {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* conteúdo principal ocupa o resto */
+.layout-content {
+  flex: 1;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 260px;
+  background-color: #f8f8f8;
+  border-right: 1px solid #d5d5d5;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Banner 200x200 no topo */
+.sidebar-banner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-banner img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #d9d9d9;
+}
+
+/* Menu Home */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #222;
+  font-size: 0.95rem;
+}
+
+.sidebar-item.ativo {
+  font-weight: 600;
+}
+
+.sidebar-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sidebar-icon-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Pesquisar */
+.sidebar-search h3,
+.sidebar-communities h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Minhas comunidades */
+#lista-comunidades {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-comunidade {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.25rem;
+  cursor: default;
+}
+
+.item-comunidade a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.25rem;
+  cursor: pointer;
+}
+
+.item-comunidade + .item-comunidade {
+  margin-top: 0.25rem;
+}
+
+.item-comunidade-avatar {
+  width: 36px; /* se quiser exatamente 50x50, põe 50 aqui */
+  height: 36px;
+  border-radius: 999px;
+  background-color: #e0e0e0;
+  flex-shrink: 0;
+}
+
+.comunidade-nome {
+  font-size: 0.9rem;
+}
+.sidebar-communities>a {
+  background-color: var(--cor-botao-editar);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 20px;
+  text-align: center;
+  padding: .7vw;
+  font-size: .9em;
+}
+
+/* Responsivo: sidebar em cima em telas pequenas */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #d5d5d5;
+  }
+}
+
+/* Responsivo: empilha sidebar embaixo em telas pequenas */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}

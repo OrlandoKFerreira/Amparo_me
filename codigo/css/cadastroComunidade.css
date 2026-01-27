@@ -1,0 +1,136 @@
+body {
+    font-family: Arial;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo-pagina);
+}
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10vw;
+}
+main h1 {
+    font-size: 1.7em;
+}
+#form-comunidade {
+    display: grid;
+    padding: 3.5vw;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 20px;
+    box-shadow: 0px -1px 65px 9px rgba(64, 82, 72, 0.75);
+    min-width: 45vw;
+}
+#form-comunidade>div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 15px;
+}
+#form-comunidade>div>label {
+    margin-bottom: 12px;
+}
+#nometopicos input {
+    margin-bottom: 15px;
+    border-radius: 25px;
+    border: 1px solid var(--cor-borda-suave);
+    background-color: #ddd;
+    outline: none;
+    font-family: inherit;
+    padding: 10px;
+    color: inherit;
+}
+#form-comunidade textarea {
+    border-radius: 8px;
+    border: 1px solid var(--cor-borda-suave);
+    background-color: #ddd;
+    outline: none;
+    font-family: inherit;
+    color: inherit;
+    scrollbar-color: var(--cor-botao-editar) rgba(0,0,0,0);
+    scrollbar-width: thin;
+}
+#descricao {
+    grid-column: span 2;
+}
+#descricao textarea {
+    width: 100%;
+    resize: vertical; 
+    padding: 20px;
+    min-height: 1em;
+}
+#btn-criar{
+    grid-column: span 2;
+    margin: 15px;
+    width: 20%;
+    justify-self: center;
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    padding: 1vw;
+    color: #eee;
+    background-color: var(--cor-primaria-ativa);
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .5s;
+}
+#btn-criar:hover {
+    background-color: var(--cor-secundaria-inativa);
+}
+#imagem-comunidade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#imagem-comunidade>input {
+    margin-bottom: 15px;
+    border-radius: 25px;
+    border: 1px solid var(--cor-borda-suave);
+    background-color: #ddd;
+    outline: none;
+    font-family: inherit;
+    padding: 10px;
+    margin-top: .7vh;
+    color: inherit;
+    width: 100%;
+}
+#imagem-comunidade>img {
+    width: 30vw;
+    height: 30vw;
+    object-fit: cover;
+    border-radius: 8px;
+}
+#send-image {
+    border:none;
+    outline: none;
+    font-family: inherit;
+    font-size: .9em;
+    background-color: var(--cor-botao-editar);
+    border-radius: 20px;
+    width: 50%;
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+@media (max-width:750px) {
+    #form-comunidade {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #nometopicos {
+        width: 100%;
+    }
+    #descricao {
+        width: 100%;
+    }
+    #imagem-comunidade>img {
+        width: 100%;
+    }
+    #btn-criar {
+        width: 60%;
+    }
+}

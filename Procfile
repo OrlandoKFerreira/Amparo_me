@@ -1,0 +1,1 @@
+web: cd codigo && npm install && npm start

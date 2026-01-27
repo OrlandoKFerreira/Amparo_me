@@ -1,0 +1,271 @@
+/* ============================
+   VARIÁVEIS E LAYOUT GERAL
+   ============================ */
+:root {
+  --cor-fundo-pagina: #f7fcfa;
+  --cor-fundo-card: #ffffff;
+  --cor-borda-suave: #eaf4ee;
+  --cor-primaria-ativa: #82c09a;
+  --cor-secundaria-inativa: #b8d8d8;
+  --cor-texto-principal: #3a4f41;
+  --cor-texto-secundario: #6a7b72;
+  --cor-botao-editar: #82c09a;
+  --cor-botao-excluir: #e59898;
+  --cor-botao-neutro: #eaf4ee;
+}
+
+/* wrapper central do perfil (fica entre header e footer globais) */
+.perfil-wrapper {
+  min-height: calc(100vh - 140px); /* espaço p/ header+footer */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: var(--cor-fundo-pagina);
+  box-sizing: border-box;
+}
+
+/* card branco central, igual ao da página de progresso */
+.profile-container {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda-suave);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   TOPO DO PERFIL (FOTO + NOME + 3 BOTÕES)
+   ============================ */
+.profile-header {
+  /* override do header global */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--cor-borda-suave);
+  height: auto;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  background-color: var(--cor-borda-suave);
+  margin: 0 auto 15px auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.profile-header h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Navegação (botões Meu perfil / Meu conteúdo / Progresso) */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.main-nav button {
+  background-color: var(--cor-botao-neutro);
+  border: 1px solid var(--cor-borda-suave);
+  color: var(--cor-texto-secundario);
+  padding: 8px 16px;
+  margin: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.main-nav button:hover {
+  background-color: #dcece2;
+}
+
+.main-nav button.active {
+  background-color: var(--cor-primaria-ativa);
+  color: var(--cor-fundo-card);
+  border-color: var(--cor-primaria-ativa);
+}
+
+/* conteúdo interno do card */
+.content-area {
+  padding: 20px;
+}
+
+/* ============================
+   COLUNAS: SOBRE MIM + LINKS
+   ============================ */
+.perfil-columns {
+  display: grid;
+  grid-template-columns: 2fr 1.3fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.perfil-card {
+  background-color: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda-suave);
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.perfil-card-title {
+  margin: 0 0 8px;
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+/* texto "sobre mim" */
+.perfil-bio {
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+/* lista de links */
+.perfil-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.perfil-links li a {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--cor-borda-suave);
+  background-color: #ffffff;
+  font-size: 0.85em;
+  color: var(--cor-texto-principal);
+  text-decoration: none;
+}
+
+.perfil-links li a:hover {
+  background-color: var(--cor-botao-neutro);
+}
+
+/* ============================
+   CONTEÚDO PUBLICADO
+   ============================ */
+.perfil-content {
+  border-radius: 8px;
+  border: 1px solid var(--cor-borda-suave);
+  background-color: var(--cor-fundo-card);
+  padding: 14px 16px 16px;
+}
+
+.perfil-content-header h3 {
+  margin: 0 0 10px;
+  font-size: 1em;
+}
+
+/* grid de cards (parecido com a grade de diário) */
+.conteudo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+/* card de conteúdo */
+.card-conteudo {
+  background-color: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda-suave);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.card-thumb {
+  height: 80px;
+  border-radius: 6px;
+  background-color: var(--cor-fundo-pagina); /* placeholder tipo imagem */
+}
+
+.card-title {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--cor-texto-principal);
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75em;
+  color: var(--cor-texto-secundario);
+}
+
+.card-text {
+  margin: 0;
+  font-size: 0.8em;
+  color: var(--cor-texto-secundario);
+}
+
+.empty-state {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: var(--cor-texto-secundario);
+}
+
+#username-input {
+  margin: 0 0 20px 0;
+  font-family: inherit;
+  border: 1px solid var(--cor-borda-suave);
+  outline: none;
+  font-size: 1em;
+  background-color: #ddd;
+  border-radius: 30px;
+  padding: 10px;
+}
+#bio-input {
+  width: 100%;
+  border: 1px solid var(--cor-borda-suave);
+  outline: none;
+  background-color: #ddd;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 1em;
+  padding: 20px;
+  resize: vertical;
+}
+
+/* ============================
+   RESPONSIVO
+   ============================ */
+@media screen and (max-width: 550px) {
+  .perfil-wrapper {
+    padding: 12px;
+  }
+
+  .perfil-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .main-nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .main-nav button {
+    width: 100%;
+  }
+}

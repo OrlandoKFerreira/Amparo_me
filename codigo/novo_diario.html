@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Registro</title>
+    <link rel="stylesheet" href="css/pagina_progresso.css">
+    <link rel="stylesheet" href="css/novo_diario.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- HEADER GLOBAL (vem do main.css) -->
+    <header class="header">
+      <img src="img/logo.png" alt="Amparo.Me" />
+      <nav>
+        <a href="PaginaInicial.html" title="Pagina inicial">
+          <i class="fa-solid fa-house-chimney"></i>
+        </a>
+        <a href="pagina_perfil.html" title="Meu Perfil"
+          ><i class="fa-solid fa-user"></i>
+        </a>
+      </nav>
+    </header>
+    <div class="profile-container layout-novo-diario">
+        
+        <aside class="sidebar-left">
+            <img src="img/img_perfil.png" alt="Foto de Perfil" class="profile-pic" id="profile-pic">
+            <h2 id="profile-name"></h2>
+
+            <div class="date-wrapper">
+                <label for="data">Data do Registro:</label>
+                <input type="date" id="data" name="data" class="form-input" required form="formDiario">
+            </div>
+        </aside>
+
+        <main class="content-right">
+            
+            <div class="right-header">
+                 <a href="pagina_progresso_inicio.html" class="btn-back">
+                    <span>&#8592;</span> Voltar
+                </a>
+                <h3>Escrever no Diário</h3>
+            </div>
+
+            <form id="formDiario">
+                <div class="form-group-text">
+                    <label for="conteudo" class="form-label">Como foi o seu dia?</label>
+                    <textarea id="conteudo" class="diary-edit-area form-input" name="progresso" placeholder="Escreva aqui seus pensamentos..." required></textarea>
+                </div>
+
+                <div class="entry-actions">
+                    <button type="button" class="btn-action btn-delete" onclick="window.location.href='pagina_progresso_inicio.html'">Cancelar</button>
+                    <button type="submit" class="btn-action btn-edit btn-save" style="padding: 8px 30px;">Salvar</button>
+                </div>
+            </form>
+
+        </main>
+    </div>
+
+    <script src="js/novo_diario.js"></script>
+    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil de Usuário</title>
+
+    <!-- CSS global do site -->
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- CSS específico desta página -->
+    <link rel="stylesheet" href="css/paginaPerfil.css" />
+  </head>
+  <body>
+    <!-- CABEÇALHO GLOBAL (mesmo das outras páginas do main) -->
+    <header class="site-header">
+      <img src="img/logo.png" alt="Amparo.Me" class="site-logo" />
+      <nav class="site-nav">
+        <a href="PaginaInicial.html" title="Pagina inicial">
+          <i class="fa-solid fa-house-chimney"></i>
+        </a>
+        <a href="pagina_perfil.html" title="Meu Perfil"
+          ><i class="fa-solid fa-user"></i>
+        </a>
+      </nav>
+    </header>
+
+    <!-- WRAPPER CENTRAL PARA ALINHAR O CARD -->
+    <main class="perfil-wrapper">
+      <div class="profile-container">
+        <!-- TOPO DO PERFIL: FOTO + NOME + BOTÕES -->
+        <main class="profile-header">
+          <img
+            src="img/img_perfil.png"
+            alt="Foto de Perfil"
+            class="profile-pic"
+            id="user-avatar"
+          />
+          <h2 id="user-name">Aurora</h2>
+
+          <nav class="main-nav">
+            <button id="btn-editar-perfil" class="active">Editar Perfil</button>
+            <button onclick="window.location.href='posts_usuario.html'">
+              Meu Conteúdo
+            </button>
+            <button
+              onclick="window.location.href='pagina_progresso_inicio.html'"
+            >
+              Progresso
+            </button>
+          </nav>
+        </main>
+
+        <!-- CONTEÚDO DO PERFIL -->
+        <section class="content-area">
+          <!-- COLUNAS: SOBRE MIM + LINKS EXTERNOS -->
+          <section class="perfil-columns">
+            <article class="perfil-card">
+              <h3 class="perfil-card-title">Sobre mim</h3>
+              <p id="user-bio" class="perfil-bio">
+                Aqui vai um texto falando um pouco sobre o usuário. Depois vamos
+                preencher isso via JavaScript usando os dados do cadastro.
+              </p>
+            </article>
+
+            <article class="perfil-card">
+              <h3 class="perfil-card-title">Links externos</h3>
+              <ul id="user-links" class="perfil-links">
+                <!-- JS vai preencher -->
+              </ul>
+            </article>
+          </section>
+
+        </section>
+      </div>
+    </main>
+
+    <script src="js/pagina_perfil.js"></script>
+    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
+  </body>
+</html>
