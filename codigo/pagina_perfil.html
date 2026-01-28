@@ -1,80 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfil de Usuário</title>
+    <title>Perfil - Amparo.Me</title>
 
-    <!-- CSS global do site -->
-    <link rel="stylesheet" href="css/main.css" />
-    <!-- CSS específico desta página -->
-    <link rel="stylesheet" href="css/paginaPerfil.css" />
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="/codigo/css/main.css" />
+    <!-- CSS DA PÁGINA -->
+    <link rel="stylesheet" href="/codigo/css/paginaPerfil.css" />
   </head>
   <body>
-    <!-- CABEÇALHO GLOBAL (mesmo das outras páginas do main) -->
-    <header class="site-header">
-      <img src="img/logo.png" alt="Amparo.Me" class="site-logo" />
-      <nav class="site-nav">
-        <a href="PaginaInicial.html" title="Pagina inicial">
-          <i class="fa-solid fa-house-chimney"></i>
-        </a>
-        <a href="pagina_perfil.html" title="Meu Perfil"
-          ><i class="fa-solid fa-user"></i>
-        </a>
-      </nav>
-    </header>
+    <div class="page-wrapper">
+      <!-- HEADER -->
+      <header class="site-header">
+        <div class="header-inner">
+          <div class="logo">Amparo.me</div>
 
-    <!-- WRAPPER CENTRAL PARA ALINHAR O CARD -->
-    <main class="perfil-wrapper">
-      <div class="profile-container">
-        <!-- TOPO DO PERFIL: FOTO + NOME + BOTÕES -->
-        <main class="profile-header">
-          <img
-            src="img/img_perfil.png"
-            alt="Foto de Perfil"
-            class="profile-pic"
-            id="user-avatar"
-          />
-          <h2 id="user-name">Aurora</h2>
-
-          <nav class="main-nav">
-            <button id="btn-editar-perfil" class="active">Editar Perfil</button>
-            <button onclick="window.location.href='posts_usuario.html'">
-              Meu Conteúdo
-            </button>
-            <button
-              onclick="window.location.href='pagina_progresso_inicio.html'"
-            >
-              Progresso
-            </button>
+          <nav class="site-nav">
+            <a href="PaginaInicial.html" title="Página inicial">🏠</a>
+            <a href="perfil.html" title="Meu Perfil">👤</a>
           </nav>
-        </main>
+        </div>
+      </header>
 
-        <!-- CONTEÚDO DO PERFIL -->
-        <section class="content-area">
-          <!-- COLUNAS: SOBRE MIM + LINKS EXTERNOS -->
-          <section class="perfil-columns">
-            <article class="perfil-card">
-              <h3 class="perfil-card-title">Sobre mim</h3>
-              <p id="user-bio" class="perfil-bio">
-                Aqui vai um texto falando um pouco sobre o usuário. Depois vamos
-                preencher isso via JavaScript usando os dados do cadastro.
-              </p>
-            </article>
+      <!-- MAIN -->
+      <main class="perfil-layout">
+        <section class="perfil-hero">
+          <div class="perfil-container">
+            <!-- TOPO DO PERFIL -->
+            <section class="perfil-header">
+              <div class="avatar-wrap">
+                <img
+                  src=""
+                  alt="Foto de perfil"
+                  class="profile-pic"
+                  id="user-avatar"
+                />
+              </div>
 
-            <article class="perfil-card">
-              <h3 class="perfil-card-title">Links externos</h3>
-              <ul id="user-links" class="perfil-links">
-                <!-- JS vai preencher -->
-              </ul>
-            </article>
-          </section>
+              <h2 id="user-name" class="profile-name">Usuário</h2>
 
+              <nav class="profile-nav">
+                <button id="btn-editar-perfil" class="profile-btn primary">
+                  Editar Perfil
+                </button>
+                <button
+                  class="profile-btn secondary"
+                  onclick="window.location.href = 'posts_usuario.html'"
+                >
+                  Meu Conteúdo
+                </button>
+                <button
+                  class="profile-btn secondary"
+                  onclick="
+                    window.location.href = 'pagina_progresso_inicio.html'
+                  "
+                >
+                  Progresso
+                </button>
+              </nav>
+            </section>
+
+            <!-- CONTEÚDO -->
+            <section class="perfil-content">
+              <div class="perfil-columns">
+                <!-- SOBRE -->
+                <article class="perfil-card">
+                  <h3 class="perfil-card-title">Sobre mim</h3>
+                  <p id="user-bio" class="perfil-bio">
+                    Carregando informações do perfil...
+                  </p>
+                </article>
+
+                <!-- LINKS -->
+                <article class="perfil-card">
+                  <h3 class="perfil-card-title">Contato</h3>
+                  <ul id="user-links" class="perfil-links"></ul>
+                </article>
+              </div>
+
+              <!-- CONTEÚDOS -->
+              <section class="perfil-content-block">
+                <div class="perfil-content-header">
+                  <h3>Meu Conteúdo</h3>
+                </div>
+
+                <div id="conteudos-grid" class="conteudo-grid"></div>
+                <p
+                  id="conteudos-empty"
+                  class="empty-state"
+                  style="display: none"
+                >
+                  Nenhum conteúdo publicado ainda.
+                </p>
+              </section>
+            </section>
+          </div>
         </section>
-      </div>
-    </main>
+      </main>
 
-    <script src="js/pagina_perfil.js"></script>
-    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <span class="footer-logo">Amparo.me</span>
+          <nav class="footer-nav">
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+            <a href="#">FAQ</a>
+            <a href="#">Termos</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/codigo/js/pagina_perfil.js"></script>
   </body>
 </html>

@@ -1,12 +1,25 @@
-// js/cadastro.js
+// =========================
+// API CONFIG
+// =========================
+const API_URL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:3000"
+    : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app";
 
-const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-  ? "http://localhost:3000"
-  : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app"
+const USERS_API = API_URL + "/usuarios";
 
-const USERS_API = API_URL+"/usuarios";
+// =========================
+// CLOUDINARY CONFIG
+// =========================
+const CLOUD_NAME = "dhgbvydnm";
+const UPLOAD_PRESET = "amparo_unsigned";
 
+// =========================
+// ELEMENTOS
+// =========================
 const formEl = document.querySelector(".cadastro-form");
+
 const nomeEl = document.getElementById("nome");
 const usernameEl = document.getElementById("username");
 const emailEl = document.getElementById("email");
@@ -15,58 +28,127 @@ const senhaEl = document.getElementById("senha");
 const confirmarSenhaEl = document.getElementById("confirmar-senha");
 const bioEl = document.getElementById("bio");
 
-const tituloCard = document.querySelector(".cadastro-card h1");
+const fotoEl = document.getElementById("foto");
+const avatarPreviewEl = document.getElementById("avatarPreview");
+
+const tituloCard = document.querySelector(".cadastro-title");
 const subtituloCard = document.querySelector(".cadastro-subtitle");
 
-let userId = null; // se tiver id => edição, senão => criação
+let userId = null;
 
+// =========================
+// INIT
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
-  userId = params.get("id"); // ex: cadastro.html?id=3
+  userId = params.get("id");
 
   if (userId) {
-    // modo ediçãoa
     carregarUsuario(userId);
     if (tituloCard) tituloCard.textContent = "Editar perfil";
-    if (subtituloCard)
+    if (subtituloCard) {
       subtituloCard.textContent =
         "Atualize seus dados para manter seu perfil em dia.";
+    }
   } else {
-    // modo criação
     if (tituloCard) tituloCard.textContent = "Cadastro";
-    if (subtituloCard)
+    if (subtituloCard) {
       subtituloCard.textContent =
         "Crie sua conta para começar a usar a plataforma.";
+    }
   }
 
   if (formEl) {
     formEl.addEventListener("submit", handleSubmit);
   }
+
+  if (fotoEl) {
+    fotoEl.addEventListener("change", atualizarPreviewFoto);
+  }
 });
 
+// =========================
+// PREVIEW
+// =========================
+function atualizarPreviewFoto() {
+  const file = fotoEl.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Selecione apenas imagens.");
+    fotoEl.value = "";
+    return;
+  }
+
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  img.alt = "Foto de perfil";
+
+  avatarPreviewEl.innerHTML = "";
+  avatarPreviewEl.appendChild(img);
+}
+
+// =========================
+// CLOUDINARY UPLOAD
+// =========================
+async function uploadFotoCloudinary(file) {
+  const data = new FormData();
+  data.append("file", file);
+  data.append("upload_preset", UPLOAD_PRESET);
+
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+    {
+      method: "POST",
+      body: data,
+    },
+  );
+
+  const json = await res.json();
+
+  if (!json.secure_url) {
+    throw new Error("Erro no upload da imagem");
+  }
+
+  return json.secure_url;
+}
+
+// =========================
+// LOAD USER
+// =========================
 async function carregarUsuario(id) {
   try {
     const resp = await fetch(`${USERS_API}/${id}`);
-    if (!resp.ok) {
-      throw new Error("Usuário não encontrado");
-    }
+    if (!resp.ok) throw new Error("Usuário não encontrado");
 
     const usuario = await resp.json();
 
-    if (nomeEl) nomeEl.value = usuario.nome || "";
-    if (usernameEl) usernameEl.value = usuario.username || "";
-    if (emailEl) emailEl.value = usuario.email || "";
-    if (telefoneEl) telefoneEl.value = usuario.telefone || "";
-    if (bioEl) bioEl.value = usuario.bio || "";
+    nomeEl.value = usuario.nome || "";
+    usernameEl.value = usuario.username || "";
+    emailEl.value = usuario.email || "";
+    telefoneEl.value = usuario.telefone || "";
+    bioEl.value = usuario.bio || "";
 
-    if (senhaEl) senhaEl.value = "";
-    if (confirmarSenhaEl) confirmarSenhaEl.value = "";
+    if (usuario.foto) {
+      const img = document.createElement("img");
+      img.src = usuario.foto;
+      img.alt = "Foto de perfil";
+
+      avatarPreviewEl.innerHTML = "";
+      avatarPreviewEl.appendChild(img);
+    }
+
+    senhaEl.value = "";
+    confirmarSenhaEl.value = "";
   } catch (erro) {
     console.error("Erro ao carregar usuário:", erro);
-    alert("Não foi possível carregar os dados do usuário.");
+    alert("Não foi possível carregar os dados.");
   }
 }
 
+// =========================
+// SUBMIT
+// =========================
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -77,10 +159,10 @@ async function handleSubmit(event) {
   const senha = senhaEl.value;
   const confirmarSenha = confirmarSenhaEl.value;
   const bio = bioEl.value.trim();
+  const file = fotoEl.files[0];
 
-  // validações básicas
   if (!nome || !username || !email || !senha) {
-    alert("Preencha pelo menos Nome, Usuário, E-mail e Senha.");
+    alert("Preencha Nome, Usuário, E-mail e Senha.");
     return;
   }
 
@@ -89,54 +171,52 @@ async function handleSubmit(event) {
     return;
   }
 
-  const usuarioPayload = {
-    nome,
-    username,
-    email,
-    telefone,
-    senha, // em produção seria hash, aqui é só protótipo
-    bio,
-  };
+  let fotoUrl = "";
 
   try {
+    if (file) {
+      fotoUrl = await uploadFotoCloudinary(file);
+    }
+
+    const usuarioPayload = {
+      nome,
+      username,
+      email,
+      telefone,
+      senha,
+      bio,
+      foto: fotoUrl,
+    };
+
     let resposta;
 
     if (userId) {
-      // EDITAR
       resposta = await fetch(`${USERS_API}/${userId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(usuarioPayload),
       });
     } else {
-      // CRIAR
       resposta = await fetch(USERS_API, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(usuarioPayload),
       });
     }
 
-    if (!resposta.ok) {
-      throw new Error("Erro ao salvar usuário");
-    }
+    if (!resposta.ok) throw new Error("Erro ao salvar");
 
     const usuarioSalvo = await resposta.json();
 
     alert(
       userId
-        ? "Dados salvos com sucesso!"
-        : `Cadastro criado! Bem-vindo(a), ${usuarioSalvo.nome}.`
+        ? "Dados atualizados com sucesso!"
+        : `Cadastro criado! Bem-vindo(a), ${usuarioSalvo.nome}`,
     );
 
-    // redireciona (ajusta para onde você quiser mandar depois do cadastro/edição)
     window.location.href = "/codigo/login.html";
   } catch (erro) {
-    console.error("Erro ao salvar usuário:", erro);
-    alert("Não foi possível salvar seus dados. Tente novamente.");
+    console.error(erro);
+    alert("Erro ao salvar usuário ou imagem.");
   }
 }

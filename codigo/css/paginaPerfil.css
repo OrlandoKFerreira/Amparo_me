@@ -1,271 +1,264 @@
-/* ============================
-   VARIÁVEIS E LAYOUT GERAL
-   ============================ */
+/* =========================
+   DESIGN TOKENS (MAPEAMENTO)
+========================= */
 :root {
-  --cor-fundo-pagina: #f7fcfa;
-  --cor-fundo-card: #ffffff;
-  --cor-borda-suave: #eaf4ee;
-  --cor-primaria-ativa: #82c09a;
-  --cor-secundaria-inativa: #b8d8d8;
-  --cor-texto-principal: #3a4f41;
-  --cor-texto-secundario: #6a7b72;
-  --cor-botao-editar: #82c09a;
-  --cor-botao-excluir: #e59898;
-  --cor-botao-neutro: #eaf4ee;
+  --color-surface: var(--cor-fundo-card);
+  --color-border: var(--cor-borda-suave);
+  --color-primary: var(--cor-primaria-ativa);
+  --color-primary-hover: #6fae8a;
+  --color-text: var(--cor-texto-principal);
+  --color-text-muted: var(--cor-texto-secundario);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+
+  --space-xs: 6px;
+  --space-sm: 10px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* wrapper central do perfil (fica entre header e footer globais) */
-.perfil-wrapper {
-  min-height: calc(100vh - 140px); /* espaço p/ header+footer */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-  background-color: var(--cor-fundo-pagina);
-  box-sizing: border-box;
-}
-
-/* card branco central, igual ao da página de progresso */
-.profile-container {
-  width: 100%;
-  max-width: 600px;
-  background-color: var(--cor-fundo-card);
-  border: 1px solid var(--cor-borda-suave);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+/* =========================
+   LAYOUT
+========================= */
+.perfil-layout {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* ============================
-   TOPO DO PERFIL (FOTO + NOME + 3 BOTÕES)
-   ============================ */
-.profile-header {
-  /* override do header global */
+/* =========================
+   HERO
+========================= */
+.perfil-hero {
+  background: linear-gradient(
+    135deg,
+    rgba(130, 192, 154, 0.12),
+    rgba(247, 252, 250, 1)
+  );
+  flex: 1;
+  padding: var(--space-xl);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.perfil-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER PERFIL
+========================= */
+.perfil-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  padding: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
   text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid var(--cor-borda-suave);
-  height: auto;
+}
+
+.avatar-wrap {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--color-primary);
+  margin-bottom: var(--space-md);
+  background: var(--color-border);
 }
 
 .profile-pic {
-  width: 150px;
-  height: 150px;
-  background-color: var(--cor-borda-suave);
-  margin: 0 auto 15px auto;
-  border-radius: 4px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.profile-header h2 {
-  margin: 0 0 20px 0;
-  font-size: 1.2em;
-  font-weight: bold;
+.profile-name {
+  margin: 0 0 var(--space-md);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text);
 }
 
-/* Navegação (botões Meu perfil / Meu conteúdo / Progresso) */
-.main-nav {
+/* =========================
+   NAV
+========================= */
+.profile-nav {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.main-nav button {
-  background-color: var(--cor-botao-neutro);
-  border: 1px solid var(--cor-borda-suave);
-  color: var(--cor-texto-secundario);
-  padding: 8px 16px;
-  margin: 0;
-  border-radius: 4px;
+/* =========================
+   BUTTONS
+========================= */
+.profile-btn {
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
   cursor: pointer;
-  font-size: 0.9em;
-  font-weight: 600;
-  transition: all 0.2s;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
-.main-nav button:hover {
-  background-color: #dcece2;
+.profile-btn.primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
 }
 
-.main-nav button.active {
-  background-color: var(--cor-primaria-ativa);
-  color: var(--cor-fundo-card);
-  border-color: var(--cor-primaria-ativa);
+.profile-btn.primary:hover {
+  background: var(--color-primary-hover);
 }
 
-/* conteúdo interno do card */
-.content-area {
-  padding: 20px;
+.profile-btn.secondary:hover {
+  background: var(--color-border);
 }
 
-/* ============================
-   COLUNAS: SOBRE MIM + LINKS
-   ============================ */
+/* =========================
+   CONTENT
+========================= */
+.perfil-content {
+  padding: var(--space-xl);
+}
+
 .perfil-columns {
   display: grid;
-  grid-template-columns: 2fr 1.3fr;
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
+/* =========================
+   CARDS
+========================= */
 .perfil-card {
-  background-color: var(--cor-fundo-card);
-  border: 1px solid var(--cor-borda-suave);
-  border-radius: 8px;
-  padding: 14px 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
 }
 
 .perfil-card-title {
-  margin: 0 0 8px;
-  font-size: 0.95em;
+  margin: 0 0 var(--space-sm);
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
-/* texto "sobre mim" */
+/* =========================
+   BIO
+========================= */
 .perfil-bio {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--cor-texto-secundario);
+  color: var(--color-text-muted);
 }
 
-/* lista de links */
+/* =========================
+   LINKS
+========================= */
 .perfil-links {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-xs);
 }
 
 .perfil-links li a {
   display: block;
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--cor-borda-suave);
-  background-color: #ffffff;
-  font-size: 0.85em;
-  color: var(--cor-texto-principal);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
   text-decoration: none;
+  font-size: 0.85rem;
 }
 
 .perfil-links li a:hover {
-  background-color: var(--cor-botao-neutro);
+  background: var(--color-border);
 }
 
-/* ============================
-   CONTEÚDO PUBLICADO
-   ============================ */
-.perfil-content {
-  border-radius: 8px;
-  border: 1px solid var(--cor-borda-suave);
-  background-color: var(--cor-fundo-card);
-  padding: 14px 16px 16px;
+/* =========================
+   CONTEÚDO
+========================= */
+.perfil-content-block {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-lg);
 }
 
-.perfil-content-header h3 {
-  margin: 0 0 10px;
-  font-size: 1em;
-}
-
-/* grid de cards (parecido com a grade de diário) */
 .conteudo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-md);
 }
 
-/* card de conteúdo */
 .card-conteudo {
-  background-color: var(--cor-fundo-card);
-  border: 1px solid var(--cor-borda-suave);
-  border-radius: 8px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
 }
 
 .card-thumb {
-  height: 80px;
-  border-radius: 6px;
-  background-color: var(--cor-fundo-pagina); /* placeholder tipo imagem */
+  height: 90px;
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .card-title {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--cor-texto-principal);
 }
 
 .card-meta {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
   display: flex;
   justify-content: space-between;
-  font-size: 0.75em;
-  color: var(--cor-texto-secundario);
 }
 
-.card-text {
-  margin: 0;
-  font-size: 0.8em;
-  color: var(--cor-texto-secundario);
-}
-
+/* =========================
+   EMPTY
+========================= */
 .empty-state {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: var(--cor-texto-secundario);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
 }
 
-#username-input {
-  margin: 0 0 20px 0;
-  font-family: inherit;
-  border: 1px solid var(--cor-borda-suave);
-  outline: none;
-  font-size: 1em;
-  background-color: #ddd;
-  border-radius: 30px;
-  padding: 10px;
-}
-#bio-input {
-  width: 100%;
-  border: 1px solid var(--cor-borda-suave);
-  outline: none;
-  background-color: #ddd;
-  border-radius: 20px;
-  font-family: inherit;
-  font-size: 1em;
-  padding: 20px;
-  resize: vertical;
-}
-
-/* ============================
-   RESPONSIVO
-   ============================ */
-@media screen and (max-width: 550px) {
-  .perfil-wrapper {
-    padding: 12px;
-  }
-
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
   .perfil-columns {
     grid-template-columns: 1fr;
   }
 
-  .main-nav {
+  .profile-nav {
     flex-direction: column;
-    gap: 8px;
+    width: 100%;
   }
 
-  .main-nav button {
+  .profile-btn {
     width: 100%;
   }
 }

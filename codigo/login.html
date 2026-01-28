@@ -2,99 +2,108 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>Login - Amparo.Me</title>
+    <title>Login - Amparo.me</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- LAYOUT COMPARTILHADO -->
+    <link rel="stylesheet" href="css/layout.css" />
+    <!-- ESTILO ESPECÍFICO DO LOGIN -->
     <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
-    <header class="top-title">LOGIN</header>
+    <div class="page-wrapper">
+      <!-- TÍTULO SUPERIOR -->
+      <header class="top-title">LOGIN</header>
 
-    <main class="login-layout">
-      <!-- Moldura tipo janela de navegador -->
-      <section class="browser-frame">
-        <div class="browser-bar">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-        </div>
-
-        <!-- Área cinza principal -->
-        <div class="hero">
-          <!-- Lado esquerdo: logo + texto -->
-          <div class="hero-left">
-            <h1 class="hero-logo">Logo</h1>
-            <p class="hero-text">
-              Banner de divulgação de elementos novos do site. <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-
-          <!-- Lado direito: card de login -->
-          <div class="hero-right">
-            <div class="login-card">
-              <form id="login-form" class="login-form">
-                <div class="form-group">
-                  <label for="email" class="form-label">Usuário</label>
-                  <input
-                    type="text"
-                    id="email"
-                    class="form-input"
-                    autocomplete="username"
-                    required
-                  />
+      <main class="login-layout">
+        <!-- MOLDURA PRINCIPAL -->
+        <section class="browser-frame">
+          <!-- HERO / FUNDO -->
+          <div class="hero">
+            <div class="hero-container">
+              <!-- LADO ESQUERDO: MARCA + TEXTO -->
+              <div class="hero-left">
+                <div class="brand">
+                  <img src="/codigo/img/logo.png" alt="" class="brand-logo" />
                 </div>
+                <p class="hero-text">
+                  Bem-vindo de volta! Faça login para continuar apoiando e
+                  compartilhando histórias inspiradoras.
+                </p>
+              </div>
 
-                <div class="form-group">
-                  <label for="senha" class="form-label">Senha</label>
-                  <input
-                    type="password"
-                    id="senha"
-                    class="form-input"
-                    autocomplete="current-password"
-                    required
-                  />
+              <!-- LADO DIREITO: CARD DE LOGIN -->
+              <div class="hero-right">
+                <div class="login-card">
+                  <form id="login-form" class="login-form">
+                    <div class="login-form-group">
+                      <label for="email" class="form-label">Usuário</label>
+                      <input
+                        type="text"
+                        id="email"
+                        class="login-input"
+                        autocomplete="username"
+                        required
+                      />
+                    </div>
+
+                    <div class="login-form-group">
+                      <label for="senha" class="form-label">Senha</label>
+                      <input
+                        type="password"
+                        id="senha"
+                        class="login-input"
+                        autocomplete="current-password"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-extra">
+                      <a href="#" class="link-forgot"> Esqueceu a senha? </a>
+                    </div>
+
+                    <button type="submit" class="login-btn primary">
+                      Entrar
+                    </button>
+
+                    <p id="login-erro" class="erro-msg"></p>
+
+                    <button
+                      type="button"
+                      class="login-btn secondary"
+                      onclick="window.location.href = 'cadastro.html'"
+                    >
+                      Se inscrever
+                    </button>
+                  </form>
                 </div>
-
-                <div class="form-extra">
-                  <a href="#" class="link-forgot">Esqueceu a senha?</a>
-                </div>
-
-                <button type="submit" class="btn-primary">Entrar</button>
-
-                <p id="login-erro" class="erro-msg"></p>
-
-                <button
-                  type="button"
-                  class="btn-secondary"
-                  onclick="window.location.href = 'cadastro.html'"
-                >
-                  Se inscrever
-                </button>
-              </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- área em branco central (como no wireframe) -->
-      <section class="middle-blank"></section>
+        <!-- ÁREA EM BRANCO CENTRAL -->
+        <section class="middle-blank"></section>
 
-      <!-- Rodapé -->
-      <footer class="page-footer">
-        <div class="footer-inner">
-          <div class="footer-logo">Logo</div>
-          <nav class="footer-nav">
-            <a href="#">About</a>
-            <a href="#">Contact us</a>
-            <a href="#">FAQ</a>
-            <a href="#">Terms and Conditions</a>
-            <a href="#">Cookie Policy</a>
-          </nav>
-        </div>
-      </footer>
-    </main>
+        <!-- RODAPÉ -->
+        <footer class="site-footer">
+          <div class="footer-inner">
+            <div class="footer-logo">Amparo.me</div>
+            <nav class="footer-nav">
+              <a href="#">About</a>
+              <a href="#">Contact us</a>
+              <a href="#">FAQ</a>
+              <a href="#">Terms and Conditions</a>
+              <a href="#">Cookie Policy</a>
+            </nav>
+          </div>
+        </footer>
+      </main>
+    </div>
 
+    <!-- SCRIPT -->
     <script src="js/login.js"></script>
   </body>
 </html>

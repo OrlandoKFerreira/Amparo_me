@@ -1,22 +1,27 @@
-/* Layout geral */
+/* =========================
+   LAYOUT GERAL
+========================= */
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   margin: 0;
-  background: #f5f5f5;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 .site-header {
-  background: #d3d3d3;
-  padding: 0.75rem 2rem;
+  background: var(--cor-header);
+  padding: 1rem 2rem;
 }
 
 .header-inner {
   max-width: 1100px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .logo {
@@ -24,60 +29,100 @@ body {
   font-weight: 700;
 }
 
-.header-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.header-actions .circle {
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  background: #b3b3b3;
-}
-
-/* AREA PRINCIPAL */
+/* =========================
+   MAIN LAYOUT
+========================= */
 .cadastro-layout {
-  min-height: calc(100vh - 140px); /* ajusta com o header/footer */
+  min-height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
 }
 
-/* bloco cinza “meio da página” do wireframe */
 .cadastro-hero {
-  background: #d3d3d3;
+  background: linear-gradient(
+    135deg,
+    rgba(130, 192, 154, 0.12),
+    rgba(247, 252, 250, 1)
+  );
   flex: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
+  padding: 3rem 1rem;
+}
+
+/* =========================
+   GRID CONTAINER
+========================= */
+.cadastro-container {
+  max-width: 900px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* =========================
+   COLUNA FOTO
+========================= */
+.avatar-column {
+  display: flex;
   justify-content: center;
 }
 
-.cadastro-container {
-  max-width: 1100px;
+.avatar-block {
   width: 100%;
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  gap: 2rem;
+  max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-/* avatar à esquerda */
 .avatar-placeholder {
   width: 100%;
   aspect-ratio: 1 / 1;
-  background: #b2b2b2;
-  border-radius: 8px;
+  border-radius: 10px;
+  background: #eaf4ee;
+  border: 2px dashed #82c09a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
-/* CARD DE CADASTRO */
+.avatar-text {
+  font-size: 0.85rem;
+  color: #3a4f41;
+  text-align: center;
+  padding: 1rem;
+}
+
+.avatar-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Input file */
+.avatar-input {
+  font-size: 0.85rem;
+}
+
+/* =========================
+   CARD FORMULÁRIO
+========================= */
 .cadastro-card {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 520px;
 }
 
-.cadastro-card h1 {
+.cadastro-title {
   margin: 0 0 0.25rem;
   font-size: 1.6rem;
 }
@@ -85,10 +130,12 @@ body {
 .cadastro-subtitle {
   margin: 0 0 1.5rem;
   font-size: 0.95rem;
-  color: #666;
+  color: #6a7b72;
 }
 
-/* FORM */
+/* =========================
+   FORM
+========================= */
 .cadastro-form {
   display: flex;
   flex-direction: column;
@@ -102,79 +149,91 @@ body {
 }
 
 .form-group label {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .form-group input,
 .form-group textarea {
-  padding: 0.55rem 0.7rem;
-  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #444;
+  border-color: #82c09a;
 }
 
-/* Botão principal */
+/* =========================
+   BOTÃO
+========================= */
 .btn-primario {
   margin-top: 0.75rem;
-  padding: 0.6rem 1.4rem;
+  padding: 0.7rem 1.6rem;
   border-radius: 999px;
   border: none;
-  background: #333;
-  color: #fff;
-  font-size: 0.95rem;
+  background: #82c09a;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
+  align-self: flex-start;
 }
 
 .btn-primario:hover {
-  background: #000;
+  filter: brightness(0.95);
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 .site-footer {
-  background: #d3d3d3;
+  background: #1e3f2a;
   padding: 1rem 2rem;
+  color: #ffffff;
 }
 
 .footer-inner {
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-logo {
   font-weight: 600;
 }
 
-.footer-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  font-size: 0.85rem;
-}
-
 .footer-nav a {
+  color: #ffffff;
+  font-size: 0.85rem;
   text-decoration: none;
-  color: #333;
+  margin-left: 0.75rem;
 }
 
-/* RESPONSIVO */
+/* =========================
+   RESPONSIVO
+========================= */
 @media (max-width: 768px) {
   .cadastro-container {
     grid-template-columns: 1fr;
   }
 
-  .avatar-placeholder {
-    max-width: 220px;
+  .avatar-block {
     margin: 0 auto;
+  }
+
+  .cadastro-card {
+    max-width: 100%;
+  }
+
+  .btn-primario {
+    width: 100%;
+    text-align: center;
   }
 }

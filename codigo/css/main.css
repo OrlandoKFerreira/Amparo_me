@@ -1,85 +1,60 @@
-* {
+/* =========================
+   DESIGN TOKENS
+========================= */
+:root {
+  /* CORES */
+  --color-bg: #f7fcfa;
+  --color-surface: #ffffff;
+
+  --color-primary: #82c09a;
+  --color-primary-hover: #6fb28a;
+
+  --color-text: #3a4f41;
+  --color-text-muted: #6a7b72;
+
+  --color-border: #eaf4ee;
+  --color-error: #dc2626;
+
+  --color-header: #bee7c3;
+
+  /* TIPOGRAFIA */
+  --font-base:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* ESPAÇAMENTO */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
+  /* RAIO */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* SOMBRA */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   RESET E BASE
+========================= */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-:root {
-  --cor-fundo-pagina: #F7FCFA;
-  --cor-fundo-card: #FFFFFF;
-  --cor-borda-suave: #EAF4EE;
-  --cor-primaria-ativa: #82C09A;
-  --cor-secundaria-inativa: #B8D8D8; 
-  --cor-texto-principal: #3A4F41;
-  --cor-texto-secundario: #6A7B72;
-  --cor-botao-editar: #82C09A; 
-  --cor-botao-excluir: #E59898; 
-  --cor-botao-neutro: #EAF4EE;
-  --cor-header:#bee7c3;
-}
+
 body {
   padding: 0;
   margin: 0;
+  font-family: var(--font-base);
+  background: var(--cor-fundo-pagina);
+  color: var(--cor-texto-principal);
 }
+
 a {
   color: inherit;
-  text-decoration: inherit;
-}
-header {
-  width: 100%;
-  background-color: var(--cor-header);
-  display: flex;
-  justify-content: space-between;
-  height: 10vh;
-  align-items: center;
-  padding: 30px;
-}
-header > img {
-  width: 6vw;
-}
-header i {
-  font-size:2em;
-  margin-left: 1vw;
-  color: #111;
-}
-footer {
-  width: 100%;
-  background-color: #1e3f2a;
-  color: #fff;
-  padding: 1.5vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-footer img {
-  background-color: #fff;
-  border-radius: 20px;
-  margin-bottom: 5vh;
-}
-
-.footer-logo {
-  width: 100px;
-  height: auto;
-}
-
-footer > ul {
-  list-style: none;
-  width: 50%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-around;
-}
-@media (max-width: 1000px) {
-  header {
-    height: 15vh;
-  }
-  footer > ul {
-    width: 80%;
-  }
-  header > img {
-    width: 15vw;
-  }
-}
-@media (max-width:500px) {
-   header > img {
-    width: 22vw;
-  }
+  text-decoration: none;
 }
