@@ -12,21 +12,30 @@ body {
 }
 
 /* =========================
-   HEADER
+   WRAPPER CENTRAL
 ========================= */
-.site-header {
-  background: var(--cor-header);
-  padding: 1rem 2rem;
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-.header-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.logo {
-  font-size: 1.4rem;
+/* =========================
+   LOGO FLUTUANTE
+========================= */
+.hero-logo {
+  font-size: 3rem;
   font-weight: 700;
+  margin-bottom: 3.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.logo-amparo {
+  color: #111;
+}
+
+.logo-me {
+  color: #82c09a;
 }
 
 /* =========================
@@ -65,6 +74,8 @@ body {
   grid-template-columns: 260px 1fr;
   gap: 2.5rem;
   align-items: start;
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Perfil — Amparo.me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/paginaPerfil.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="site-header">
+        <div class="header-inner">
+          <img src="img/logo.png" alt="Amparo.me" class="site-logo" />
+
+          <nav class="site-nav">
+            <a href="PaginaInicial.html" title="Página inicial">🏠</a>
+            <a href="perfil.html" title="Meu Perfil">👤</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="perfil-layout">
+        <section class="perfil-hero">
+          <div class="perfil-container">
+            <section class="perfil-header">
+              <div class="avatar-wrap">
+                <img id="user-avatar" class="profile-pic" />
+              </div>
+
+              <h2 id="user-name" class="profile-name">Usuário</h2>
+
+              <!-- NAV LIMPO -->
+              <div class="profile-nav">
+                <button
+                  type="button"
+                  class="profile-btn primary"
+                  data-tab="perfil"
+                >
+                  Perfil
+                </button>
+                <button
+                  type="button"
+                  class="profile-btn secondary"
+                  data-tab="conteudo"
+                >
+                  Meu Conteúdo
+                </button>
+                <button
+                  type="button"
+                  class="profile-btn secondary"
+                  data-tab="progresso"
+                >
+                  Progresso
+                </button>
+              </div>
+            </section>
+
+            <section class="perfil-content">
+              <div id="tab-perfil" class="tab active">
+                <div class="perfil-columns">
+                  <article class="perfil-card">
+                    <h3 class="perfil-card-title">Sobre mim</h3>
+                    <p id="user-bio" class="perfil-bio"></p>
+                  </article>
+
+                  <article class="perfil-card">
+                    <h3 class="perfil-card-title">Contato</h3>
+                    <ul id="user-links" class="perfil-links"></ul>
+                  </article>
+                </div>
+              </div>
+
+              <div id="tab-conteudo" class="tab">
+                <div id="conteudo-list"></div>
+              </div>
+
+              <div id="tab-progresso" class="tab">
+                <div id="progresso-grid" class="grid-container"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <span class="footer-logo">Amparo.me</span>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/perfil_spa.js"></script>
+  </body>
+</html>

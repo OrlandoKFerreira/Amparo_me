@@ -5,3 +5,4 @@ Com a ideia de criar uma comunidade para tratar problemas relacionados à saúde
 Acreditamos que a saúde mental é um tópico que não recebe atenção o suficiente, mesmo que afete a população inteira. Portanto, nosso objetivo de criar um espaço seguro para todos vem deste desejo de aumentar a conscientização de algo tão relevante.
 
 - Orlando Kelvin Ferreira
+  s

@@ -1,63 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Registro</title>
-    <link rel="stylesheet" href="css/pagina_progresso.css">
-    <link rel="stylesheet" href="css/novo_diario.css">
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-    <!-- HEADER GLOBAL (vem do main.css) -->
-    <header class="header">
-      <img src="img/logo.png" alt="Amparo.Me" />
-      <nav>
-        <a href="PaginaInicial.html" title="Pagina inicial">
-          <i class="fa-solid fa-house-chimney"></i>
-        </a>
-        <a href="pagina_perfil.html" title="Meu Perfil"
-          ><i class="fa-solid fa-user"></i>
-        </a>
-      </nav>
-    </header>
-    <div class="profile-container layout-novo-diario">
-        
-        <aside class="sidebar-left">
-            <img src="img/img_perfil.png" alt="Foto de Perfil" class="profile-pic" id="profile-pic">
-            <h2 id="profile-name"></h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novo Diário - Amparo.me</title>
 
-            <div class="date-wrapper">
-                <label for="data">Data do Registro:</label>
-                <input type="date" id="data" name="data" class="form-input" required form="formDiario">
-            </div>
-        </aside>
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/layout.css" />
 
-        <main class="content-right">
-            
-            <div class="right-header">
-                 <a href="pagina_progresso_inicio.html" class="btn-back">
-                    <span>&#8592;</span> Voltar
-                </a>
-                <h3>Escrever no Diário</h3>
-            </div>
+    <!-- CSS DA PÁGINA -->
+    <link rel="stylesheet" href="css/novo_diario.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <!-- HEADER -->
+      <header class="site-header">
+        <div class="header-inner">
+          <div class="logo">Amparo<span class="logo-accent">.me</span></div>
+        </div>
+      </header>
 
-            <form id="formDiario">
-                <div class="form-group-text">
-                    <label for="conteudo" class="form-label">Como foi o seu dia?</label>
-                    <textarea id="conteudo" class="diary-edit-area form-input" name="progresso" placeholder="Escreva aqui seus pensamentos..." required></textarea>
-                </div>
+      <!-- MAIN -->
+      <main class="diario-layout">
+        <section class="diario-hero">
+          <div class="diario-container">
+            <form id="formDiario" class="diario-paper">
+              <div class="diario-week" id="diario-week"></div>
+              <!-- DATA -->
+              <div class="diario-date">
+                <span id="data-formatada">-- / -- / ----</span>
+                <input type="date" id="data" name="data" hidden required />
+              </div>
+              <div class="diario-page">
+                Página <span id="page-number">—</span>
+              </div>
 
-                <div class="entry-actions">
-                    <button type="button" class="btn-action btn-delete" onclick="window.location.href='pagina_progresso_inicio.html'">Cancelar</button>
-                    <button type="submit" class="btn-action btn-edit btn-save" style="padding: 8px 30px;">Salvar</button>
-                </div>
+              <!-- TEXTO -->
+              <textarea
+                id="conteudo"
+                name="progresso"
+                class="diario-text"
+                placeholder="Se eu estivesse aqui com você, o que você me contaria sobre hoje?"
+                required
+              ></textarea>
+
+              <!-- AÇÕES -->
+              <div class="diario-actions">
+                <button
+                  type="button"
+                  class="btn-action btn-cancel"
+                  onclick="window.location.href = 'perfil.html'"
+                >
+                  Cancelar
+                </button>
+
+                <button type="submit" class="btn-action btn-save">
+                  Salvar
+                </button>
+              </div>
             </form>
+          </div>
+        </section>
+      </main>
 
-        </main>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <span class="footer-logo">Amparo.me</span>
+          <nav class="footer-nav">
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+            <a href="#">FAQ</a>
+            <a href="#">Termos</a>
+          </nav>
+        </div>
+      </footer>
     </div>
 
     <script src="js/novo_diario.js"></script>
-    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>

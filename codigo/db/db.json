@@ -45,6 +45,16 @@
       "senha": "1234",
       "bio": "oiii",
       "foto": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769580136/xhvemfowstyd8ceklmxf.jpg"
+    },
+    {
+      "id": "5a36",
+      "nome": "Tomas",
+      "username": "tomas",
+      "email": "tomas@gmail.com",
+      "telefone": "13131312",
+      "senha": "1234",
+      "bio": "oi",
+      "foto": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769637299/v3eyei2b1kzb7xw4mwdq.jpg"
     }
   ],
   "registrosHumor": [
@@ -347,6 +357,34 @@
           "valor": 5
         }
       ]
+    },
+    {
+      "id": "d710",
+      "usuarioId": "5a36",
+      "data": "2026-01-28",
+      "dataHora": "2026-01-28T21:55:26.263Z",
+      "respostas": [
+        {
+          "perguntaId": "geral",
+          "valor": 1
+        },
+        {
+          "perguntaId": "sono",
+          "valor": 2
+        },
+        {
+          "perguntaId": "energia",
+          "valor": 2
+        },
+        {
+          "perguntaId": "ansiedade",
+          "valor": 3
+        },
+        {
+          "perguntaId": "social",
+          "valor": 2
+        }
+      ]
     }
   ],
   "communities": [
@@ -460,9 +498,9 @@
     },
     {
       "id": "577e",
-      "data": "2026-01-28",
-      "diario": "1234",
-      "dataFormatada": "28/01/2026",
+      "data": "2026-01-25",
+      "diario": "123456+",
+      "dataFormatada": "25/01/2026",
       "user_id": "95e1"
     },
     {
@@ -474,10 +512,160 @@
     },
     {
       "id": "2fc3",
+      "data": "2026-01-25",
+      "diario": "12345646546546",
+      "dataFormatada": "25/01/2026",
+      "user_id": "1fd7"
+    },
+    {
+      "id": "2fc3",
       "data": "2026-01-28",
-      "diario": "1234",
+      "diario": "1234567",
       "dataFormatada": "28/01/2026",
       "user_id": "1fd7"
+    },
+    {
+      "id": "d278",
+      "data": "2026-01-28",
+      "dataFormatada": "terça-feira, 27 de janeiro de 2026",
+      "diario": "Estou me sentindo melhor etc...",
+      "user_id": "95e1"
+    },
+    {
+      "id": "2cf3",
+      "pagina": 5,
+      "data": "2026-01-28",
+      "dataFormatada": "terça-feira, 27 de janeiro de 2026",
+      "diario": "Estou me sentindo melhor etc...",
+      "user_id": "95e1"
+    },
+    {
+      "id": "d61c",
+      "pagina": 1,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "a081",
+      "pagina": 6,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "Estou me sentindo melhor etc...",
+      "user_id": "95e1"
+    },
+    {
+      "id": "902a",
+      "pagina": 7,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "Estou me sentindo melhor etc...",
+      "user_id": "95e1"
+    },
+    {
+      "id": "f1bb",
+      "pagina": 8,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "Estou me sentindo melhor etc...",
+      "user_id": "95e1"
+    },
+    {
+      "id": "90a4",
+      "pagina": 9,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "Estou me sentindo melhor etc...",
+      "user_id": "95e1"
+    },
+    {
+      "id": "04df",
+      "pagina": 2,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "5b48",
+      "pagina": 3,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "a7a9",
+      "pagina": 4,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "9362",
+      "pagina": 5,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "4840",
+      "pagina": 6,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "9f4f",
+      "pagina": 7,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "9e17",
+      "pagina": 8,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "0d36",
+      "pagina": 9,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "9754",
+      "pagina": 10,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "40d4",
+      "pagina": 11,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
+    },
+    {
+      "id": "7172",
+      "pagina": 12,
+      "data": "2026-01-28",
+      "dataFormatada": "quarta-feira, 28 de janeiro de 2026",
+      "diario": "etrstando",
+      "user_id": "5a36"
     }
   ]
 }

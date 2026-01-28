@@ -1,151 +1,203 @@
-/* =========================================
-   ESTILOS ESPECÍFICOS PARA A PÁGINA NOVO DIÁRIO
-   ========================================= */
-
-/* Redefine o container para layout lateral (duas colunas) */
-.profile-container.layout-novo-diario {
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
-    flex-direction: row;
-    align-items: stretch;
-    overflow: hidden;
+/* =========================
+   LAYOUT BASE
+========================= */
+.diario-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.logo-accent {
+  color: var(--color-primary);
+}
+.diario-hero {
+  flex: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(130, 192, 154, 0.15),
+    rgba(247, 252, 250, 1)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 100px;
 }
 
-/* --- COLUNA ESQUERDA (Sidebar) --- */
-.sidebar-left {
-    width: 200px; /* Largura reduzida (era 280px) para diminuir os espaços laterais */
-    background-color: #fafdfb;
-    border-right: 1px solid var(--cor-borda-suave);
-    padding: 25px 15px;
-    
-    /* Centralização total */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza itens horizontalmente no eixo flex */
-    text-align: center;  /* Garante que textos fiquem centralizados */
-    flex-shrink: 0;
+/* =========================
+   CONTAINER CENTRAL
+========================= */
+.diario-container {
+  width: 100%;
+  max-width: 800px;
 }
 
-.sidebar-left .profile-pic {
-    width: 100px; /* Imagem levemente menor para harmonizar com a largura reduzida */
-    height: 100px;
-    margin-bottom: 10px;
-    border-radius: 50%; /* Garante que fique redonda, se desejar */
-    object-fit: cover;
+/* =========================
+   PAPEL DO DIÁRIO
+========================= */
+.diario-paper {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 40px 45px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  min-height: 1000px;
+  position: relative;
+}
+.diario-page {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-align: right;
+  margin-bottom: var(--space-sm);
+  font-style: italic;
 }
 
-.sidebar-left h2 {
-    margin: 0 0 20px 0;
-    font-size: 1.1em;
-    color: var(--cor-texto-principal);
+/* =========================
+   DATA
+========================= */
+.diario-date {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  text-align: left;
+  padding-bottom: 50px;
 }
 
-/* Wrapper da Data - Garante a centralização pedida */
-.date-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o input e o label */
+/* =========================
+   TÍTULO
+========================= */
+.diario-title {
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+  font-family: "Georgia", "Merriweather", serif;
 }
 
-.date-wrapper label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--cor-texto-secundario);
-    font-size: 0.85em;
+/* =========================
+   ÁREA DE TEXTO
+========================= */
+.diario-text {
+  text-indent: 1rem;
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+
+  font-family: "Georgia", "Merriweather", serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+
+  color: var(--color-text);
+  background: repeating-linear-gradient(
+    #ffffff,
+    #ffffff 28px,
+    rgba(0, 0, 0, 0.04) 29px
+  );
+
+  padding: 20px 12px;
 }
 
-/* Ajuste no input de data para ele não ficar largo demais */
-.date-wrapper input[type="date"] {
-    width: 90%; /* Ocupa quase toda a largura da sidebar */
-    text-align: center;
+/* =========================
+   BOTÕES
+========================= */
+.diario-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
 }
 
-/* --- COLUNA DIREITA (Conteúdo) --- */
-.content-right {
-    flex-grow: 1; /* Ocupa todo o espaço restante (Prioridade para o texto) */
-    padding: 20px 25px;
-    display: flex;
-    flex-direction: column;
-    min-width: 0; /* Evita que o flex item estoure */
+.btn-action {
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.15s ease;
 }
 
-.right-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--cor-borda-suave);
+.btn-cancel {
+  background: var(--color-border);
+  color: var(--color-text);
 }
 
-.right-header h3 {
-    margin: 0;
-    color: var(--cor-texto-principal);
-    font-size: 1.1em;
+.btn-cancel:hover {
+  background: #ddd;
 }
 
-/* Formulário e Área de Texto */
-#formDiario {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+.btn-save {
+  background: var(--color-primary);
+  color: #ffffff;
 }
 
-.form-group-text {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
+.btn-save:hover {
+  background: var(--color-primary-hover);
+}
+/* =========================
+   BARRA DE DIAS (SEMANA)
+========================= */
+/* =========================
+   BARRA DE DIAS (SEMANA)
+========================= */
+.diario-week {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: var(--space-lg);
 }
 
-.diary-edit-area {
-    flex-grow: 1;
-    resize: none;
-    height: 100%;
-    min-height: 250px; /* Altura mínima garantida */
-    padding: 12px;
+/* Base */
+.day-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-/* Botões */
-.entry-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
+/* Dia de hoje (sempre maior) */
+.day-dot.today {
+  width: 16px;
+  height: 16px;
+  border-color: var(--color-primary);
 }
 
-/* --- RESPONSIVIDADE (Mobile) --- */
+/* Dia com diário salvo */
+.day-dot.filled {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Dia selecionado */
+.day-dot.active {
+  transform: scale(1.4);
+  box-shadow: 0 0 0 4px rgba(130, 192, 154, 0.25);
+}
+
+/* Dia sem diário (pista visual) */
+.day-dot.empty::after {
+  content: "–";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
 @media (max-width: 600px) {
-    .profile-container.layout-novo-diario {
-        flex-direction: column;
-        max-width: 100%;
-    }
+  .diario-paper {
+    padding: 25px;
+  }
 
-    .sidebar-left {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--cor-borda-suave);
-        flex-direction: row; /* No celular, foto e data lado a lado */
-        justify-content: space-around;
-        padding: 15px;
-        box-sizing: border-box;
-    }
-
-    .sidebar-left .profile-pic {
-        width: 60px;
-        height: 60px;
-        margin: 0;
-    }
-    
-    .sidebar-left h2 {
-        margin: 0 10px;
-        font-size: 1em;
-    }
-    
-    .date-wrapper {
-        width: auto;
-        align-items: flex-start;
-    }
+  .diario-title {
+    font-size: 1.2rem;
+  }
 }
