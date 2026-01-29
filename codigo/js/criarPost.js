@@ -1,8 +1,11 @@
 // /codigo/js/criarPost.js
 
-const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-  ? "http://localhost:3000"
-  : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app"
+const API_URL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:3000"
+    : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app";
+
 const HOME_PAGE = "PaginaInicial.html"; // página inicial
 const ARTICLE_PAGE = "paginaArtigo.html"; // página do artigo
 const FORM_PAGE = "criacaoDePost.html"; // esta mesma página
@@ -10,6 +13,7 @@ const USER_ID = JSON.parse(sessionStorage.getItem("usuarioLogado")).id; //usuari
 
 // vamos guardar o post atual quando estiver em modo edição
 let postAtual = null;
+let imagemBase64 = "";
 
 function getQueryParam(name) {
   const params = new URLSearchParams(window.location.search);
@@ -32,39 +36,22 @@ function setActiveTab(tabName) {
   });
 }
 
-function initTabs() {
-  const tabs = document.querySelectorAll(".cp-aba");
-  if (!tabs.length) return;
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      setActiveTab(tab.dataset.tab);
-    });
-  });
-
-  // padrão: texto
-  setActiveTab("texto");
-}
-
 // ---- Preview da imagem ----
 function initImagePreview() {
   const input = document.getElementById("cp-imagem");
   const preview = document.getElementById("cp-preview");
   if (!input || !preview) return;
 
-  input.addEventListener("input", () => {
-    const url = input.value.trim();
-    preview.innerHTML = "";
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+    if (!file) return;
 
-    if (!url) return;
-
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = "Pré-visualização da imagem";
-    img.style.maxWidth = "100%";
-    img.style.borderRadius = "8px";
-
-    preview.appendChild(img);
+    const reader = new FileReader();
+    reader.onload = () => {
+      imagemBase64 = reader.result;
+      preview.innerHTML = `<img src="${imagemBase64}">`;
+    };
+    reader.readAsDataURL(file);
   });
 }
 
@@ -84,8 +71,8 @@ async function carregarComunidadesSelect(valorSelecionado) {
 
     comunidades.forEach((c) => {
       const opt = document.createElement("option");
-      //nota: melhor usar o id como value p/ evitar conflito de comunidades com mesmo nome 
-      opt.value = c.id; 
+      //nota: melhor usar o id como value p/ evitar conflito de comunidades com mesmo nome
+      opt.value = c.id;
       opt.textContent = c.name; // ex: "Ansiedade Social"
       select.appendChild(opt);
     });
@@ -123,7 +110,24 @@ async function carregarPostParaEdicao(id) {
   if (tituloEl) tituloEl.value = post.title || post.titulo || "";
   if (categoriaEl) categoriaEl.value = post.categoria || "";
   if (textoEl) textoEl.value = post.text || post.texto || "";
-  if (imagemEl) imagemEl.value = post.imageUrl || post.imagem || "";
+  // NÃO tente setar value de input file
+  // Só mostra no preview
+
+  if (preview && (post.imageUrl || post.imagem)) {
+    const imgUrl = post.imageUrl || post.imagem;
+
+    preview.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = imgUrl;
+    img.alt = "Pré-visualização da imagem";
+    img.style.maxWidth = "100%";
+    img.style.borderRadius = "8px";
+    preview.appendChild(img);
+
+    // 🔥 mantém a imagem original se o usuário não trocar
+    imagemBase64 = imgUrl;
+  }
+
   if (linkEl) linkEl.value = post.link || "";
 
   // define aba baseada nos dados salvos
@@ -131,16 +135,6 @@ async function carregarPostParaEdicao(id) {
     post.tipo ||
     (post.imageUrl || post.imagem ? "imagem" : post.link ? "link" : "texto");
   setActiveTab(tipo);
-
-  if (preview && (post.imageUrl || post.imagem)) {
-    preview.innerHTML = "";
-    const img = document.createElement("img");
-    img.src = post.imageUrl || post.imagem;
-    img.alt = "Pré-visualização da imagem";
-    img.style.maxWidth = "100%";
-    img.style.borderRadius = "8px";
-    preview.appendChild(img);
-  }
 
   if (botao) botao.textContent = "Salvar alterações";
 
@@ -154,58 +148,44 @@ async function salvarPost(idExistente) {
   const tituloEl = document.getElementById("titulo");
   const categoriaEl = document.getElementById("categoria");
   const textoEl = document.getElementById("cp-texto");
-  const imagemEl = document.getElementById("cp-imagem");
   const linkEl = document.getElementById("cp-url");
 
-  const abaAtiva = document.querySelector('.cp-aba[aria-selected="true"]');
-  const tipo = abaAtiva ? abaAtiva.dataset.tab : "texto";
+  const likes = postAtual?.likes ?? 0;
+  const dislikes = postAtual?.dislikes ?? 0;
 
-  const comunidade = comunidadeEl?.value || 0;
+  const comunidade = comunidadeEl?.value || null;
+
   const titulo = tituloEl?.value.trim() || "";
   const categoria = categoriaEl?.value || "";
   const texto = textoEl?.value.trim() || "";
-  const imagem = imagemEl?.value.trim() || "";
   const link = linkEl?.value.trim() || "";
+  const imagem = imagemBase64 || "";
 
-  // validações básicas
-  if (!titulo) {
-    alert("Preencha o título do post.");
-    return;
-  }
+  // validações mínimas
+  if (!titulo) return alert("Preencha o título do post.");
+  if (!texto && !imagem && !link)
+    return alert("Adicione texto, imagem ou link ao post.");
 
-  if (!comunidade) {
-    alert("Escolha a comunidade.");
-    return;
-  }
+  // tipo automático
+  let tipo = "texto";
+  if (imagem) tipo = "imagem";
+  else if (link) tipo = "link";
 
-  if (tipo === "texto" && !texto) {
-    alert("Preencha o conteúdo em texto.");
-    return;
-  }
-  if (tipo === "imagem" && !imagem) {
-    alert("Informe a URL da imagem.");
-    return;
-  }
-  if (tipo === "link" && !link) {
-    alert("Informe o link.");
-    return;
-  }
-
-  // payload compatível com a home (title/text/imageUrl) + extras
   const payload = {
     comunidade,
     categoria,
-    tipo, // "texto" | "imagem" | "link"
+    tipo,
     title: titulo,
     text: texto,
     imageUrl: imagem,
     link,
-    user_id:USER_ID
+    user_id: USER_ID,
+    likes,
+    dislikes,
   };
 
-  // na criação, adiciona createdAt
-  // na edição, preserva o createdAt original se existir
-  if (idExistente && postAtual && postAtual.createdAt) {
+  // createdAt
+  if (idExistente && postAtual?.createdAt) {
     payload.createdAt = postAtual.createdAt;
   } else if (!idExistente) {
     payload.createdAt = new Date().toISOString();
@@ -228,62 +208,58 @@ async function salvarPost(idExistente) {
   const idFinal = idExistente || saved.id;
 
   alert(
-    idExistente ? "Post atualizado com sucesso!" : "Post criado com sucesso!"
+    idExistente ? "Post atualizado com sucesso!" : "Post criado com sucesso!",
   );
 
-  // se estava editando, volta para a página do artigo
-  if (idExistente) {
-    window.location.href = `${ARTICLE_PAGE}?id=${idFinal}`;
-  } else {
-    // novo post: volta para a home
-    window.location.href = HOME_PAGE;
-  }
+  window.location.href = idExistente
+    ? `${ARTICLE_PAGE}?id=${idFinal}`
+    : HOME_PAGE;
 }
 
 // ---- Inicialização da página ----
-document.addEventListener("DOMContentLoaded", () => {
-  initTabs();
+document.addEventListener("DOMContentLoaded", async () => {
   initImagePreview();
 
   const id = getQueryParam("id");
 
-  if (id) {
-    // modo edição
-    carregarPostParaEdicao(id)
-      .then((post) => {
-        // depois que o post veio, carregamos as comunidades
-        // e marcamos a que já estava salva em post.comunidade
-        carregarComunidadesSelect(post?.comunidade);
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Erro ao carregar o post para edição.");
-        // mesmo com erro, ainda tenta carregar a lista de comunidades
-        carregarComunidadesSelect();
-      });
-  } else {
-    // modo criação: só carrega a lista de comunidades
-    carregarComunidadesSelect();
+  try {
+    if (id) {
+      // 1. Carrega comunidades primeiro
+      await carregarComunidadesSelect();
+
+      // 2. Depois carrega o post
+      const post = await carregarPostParaEdicao(id);
+
+      // 3. Agora seleciona a comunidade certa
+      const select = document.getElementById("comunidade");
+      if (select && post?.comunidade) {
+        select.value = post.comunidade;
+      }
+    } else {
+      await carregarComunidadesSelect();
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao carregar o post para edição.");
   }
 
   const btnSalvar = document.getElementById("cp-publicar");
   if (btnSalvar) {
     btnSalvar.addEventListener("click", () => {
-      salvarPost(id).catch((err) => {
-        console.error(err);
+      salvarPost(id).catch(() => {
         alert("Erro ao salvar o post.");
       });
     });
   }
-
   const btnDescartar = document.getElementById("cp-descartar");
+
   if (btnDescartar) {
     btnDescartar.addEventListener("click", () => {
       if (id) {
-        // estava editando → volta pro artigo
+        // modo edição → volta para o artigo
         window.location.href = `${ARTICLE_PAGE}?id=${id}`;
       } else {
-        // criação → volta pra home
+        // modo criação → volta para a home
         window.location.href = HOME_PAGE;
       }
     });

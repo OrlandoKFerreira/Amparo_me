@@ -10,17 +10,8 @@
   </head>
   <body>
     <div class="page-wrapper">
-      <header class="site-header">
-        <div class="header-inner">
-          <img src="img/logo.png" alt="Amparo.me" class="site-logo" />
-
-          <nav class="site-nav">
-            <a href="PaginaInicial.html" title="Página inicial">🏠</a>
-            <a href="perfil.html" title="Meu Perfil">👤</a>
-          </nav>
-        </div>
-      </header>
-
+      <!-- header SPA -->
+      <div id="header-root"></div>
       <main class="perfil-layout">
         <section class="perfil-hero">
           <div class="perfil-container">
@@ -28,10 +19,7 @@
               <div class="avatar-wrap">
                 <img id="user-avatar" class="profile-pic" />
               </div>
-
               <h2 id="user-name" class="profile-name">Usuário</h2>
-
-              <!-- NAV LIMPO -->
               <div class="profile-nav">
                 <button
                   type="button"
@@ -56,7 +44,6 @@
                 </button>
               </div>
             </section>
-
             <section class="perfil-content">
               <div id="tab-perfil" class="tab active">
                 <div class="perfil-columns">
@@ -96,5 +83,6 @@
     </div>
 
     <script src="js/perfil_spa.js"></script>
+    <script src="js/header.js"></script>
   </body>
 </html>

@@ -19,13 +19,13 @@ var comunidades = {};
 document.addEventListener("DOMContentLoaded", () => {
   carregarFeed(true);
   carregarComunidades();
-  carregarAvatarSidebar();
+  carregarAvatarHeader();
 
   if (typeof initAcoesPosts === "function") {
     initAcoesPosts();
   }
 });
-function carregarAvatarSidebar() {
+function carregarAvatarHeader() {
   const json =
     sessionStorage.getItem("usuarioLogado") ||
     localStorage.getItem("usuarioLogado");
@@ -33,7 +33,7 @@ function carregarAvatarSidebar() {
   if (!json) return;
 
   const user = JSON.parse(json);
-  const img = document.getElementById("sidebar-avatar");
+  const img = document.getElementById("header-avatar");
 
   if (img && user.foto) {
     img.src = user.foto;

@@ -1,89 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pagina do artigo</title>
+    <title>Página do Artigo</title>
 
     <!-- estilos globais -->
     <link rel="stylesheet" href="css/main.css" />
-    <!-- estilos específicos da página de artigo -->
+    <!-- estilos específicos -->
     <link rel="stylesheet" href="css/paginaArtigo.css" />
   </head>
   <body>
-    <!-- HEADER GLOBAL (vem do main.css) -->
-    <header class="header">
-      <img src="img/logo.png" alt="Amparo.Me" />
-      <nav>
-        <a href="PaginaInicial.html" title="Pagina inicial">
-          <i class="fa-solid fa-house-chimney"></i>
-        </a>
-        <a href="pagina_perfil.html" title="Meu Perfil"
-          ><i class="fa-solid fa-user"></i>
-        </a>
-      </nav>
-    </header>
+    <!-- HEADER GLOBAL INJETADO -->
+    <div id="header-root"></div>
 
-    <main>
+    <main class="page-wrapper">
       <!-- CABEÇALHO DO ARTIGO -->
-      <div class="artigo-header">
+      <header class="artigo-header">
         <a href="PaginaInicial.html" class="btn-voltar">
           ← Voltar para a página inicial
         </a>
 
-        <!-- Título do post -->
-        <h1 id="artigo-titulo">Tema</h1>
-        <!-- Meta: comunidade / categoria / data -->
-        <p id="artigo-meta">Breve descrição do tema.</p>
-      </div>
+        <h1 id="artigo-titulo">Carregando...</h1>
+        <p id="artigo-meta"></p>
+      </header>
 
-     <article class="post-principal">
-  <img
-    id="artigo-imagem"
-    src="/codigo/img/img2.png"
-    alt="Imagem de destaque do artigo"
-    class="imgArtigo"
-  />
-  <p id="artigo-corpo">Lorem ipsum dolor sit amet...</p>
+      <!-- POST -->
+      <article class="post-principal artigo-paper">
+        <img
+          id="artigo-imagem"
+          alt="Imagem de destaque do artigo"
+          class="imgArtigo"
+        />
 
-  <!-- Resumo das reações -->
-  <p id="artigo-reacoes-texto" class="artigo-reacoes-texto">
-    <!-- JS preenche -->
-  </p>
+        <div id="artigo-corpo" class="diario-style"></div>
 
-  <!-- Ações + likes -->
-  <div class="artigo-acoes">
-    <div class="acoes-primarias">
-      <a href="#" id="btn-editar-artigo" class="btn-secundario">Editar</a>
-      <button type="button" id="btn-excluir-artigo" class="btn-perigo">
-        Excluir
-      </button>
-    </div>
+        <!-- Resumo das reações -->
+        <p id="artigo-reacoes-texto" class="artigo-reacoes-texto"></p>
 
-    <div class="artigo-reacoes-botoes">
-      <button type="button" id="btn-like" class="btn-reacao">
-        👍 Curtir <span id="likes-count">0</span>
-      </button>
+        <!-- Ações + likes -->
+        <div class="artigo-acoes">
+          <div class="acoes-primarias">
+            <a href="#" id="btn-editar-artigo" class="btn-secundario">
+              Editar
+            </a>
+            <button type="button" id="btn-excluir-artigo" class="btn-perigo">
+              Excluir
+            </button>
+          </div>
 
-      <button type="button" id="btn-dislike" class="btn-reacao">
-        👎 Não curtir <span id="dislikes-count">0</span>
-      </button>
-    </div>
-  </div>
-</article>
+          <div class="artigo-reacoes-botoes">
+            <button type="button" id="btn-like" class="btn-reacao">
+              👍 Curtir <span id="likes-count">0</span>
+            </button>
 
+            <button type="button" id="btn-dislike" class="btn-reacao">
+              👎 Não curtir <span id="dislikes-count">0</span>
+            </button>
+          </div>
+        </div>
+      </article>
 
+      <!-- SUGESTÕES -->
       <section class="conteudo-sugerido">
         <h2>Conteúdo Sugerido</h2>
-
-        <!-- JS vai preencher isso com outros posts -->
         <div class="grade-sugestoes" id="sugestoes-container"></div>
       </section>
     </main>
 
-
-    <!-- JS que carrega o artigo -->
+    <!-- Scripts -->
+    <script src="js/header.js"></script>
     <script src="js/paginaartigo.js"></script>
-    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/930963f86e.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
