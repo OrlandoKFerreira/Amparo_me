@@ -13,8 +13,7 @@
 .site-logo {
   height: 100px;
 }
-.site-nav {
-}
+
 .perfil-hero {
   background: linear-gradient(
     135deg,
@@ -48,7 +47,12 @@
   border-bottom: 1px solid var(--color-border);
   text-align: center;
 }
-
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+}
 .avatar-wrap {
   width: 140px;
   height: 140px;
@@ -133,6 +137,7 @@
 /* =========================
    CARDS
 ========================= */
+
 .perfil-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);

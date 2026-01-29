@@ -66,6 +66,10 @@ const UI = {
     dot.classList.add(estado);
   },
 };
+function getQueryData() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("data");
+}
 
 // =========================
 // SERVIÇO DE TEMPO
@@ -90,7 +94,9 @@ const TimeService = {
   },
 
   formatarTexto(dataISO) {
-    return new Date(dataISO + "T12:00:00").toLocaleDateString("pt-BR", {
+    const [y, m, d] = dataISO.split("-");
+    const date = new Date(y, m - 1, d); // local, sem UTC
+    return date.toLocaleDateString("pt-BR", {
       weekday: "long",
       day: "2-digit",
       month: "long",
@@ -99,13 +105,20 @@ const TimeService = {
   },
 
   gerarUltimos7Dias(baseISO) {
-    const base = new Date(baseISO);
+    const [y, m, d] = baseISO.split("-").map(Number);
+    const base = new Date(y, m - 1, d); // local, sem UTC
+
     const dias = [];
 
     for (let i = 6; i >= 0; i--) {
-      const d = new Date(base);
-      d.setDate(base.getDate() - i);
-      dias.push(this.formatISO(d));
+      const dt = new Date(base);
+      dt.setDate(base.getDate() - i);
+
+      const ano = dt.getFullYear();
+      const mes = String(dt.getMonth() + 1).padStart(2, "0");
+      const dia = String(dt.getDate()).padStart(2, "0");
+
+      dias.push(`${ano}-${mes}-${dia}`);
     }
 
     return dias;
@@ -119,6 +132,15 @@ const DiarioAPI = {
   async listar(userId) {
     const resp = await fetch(`${API_URL}/progressos?user_id=${userId}`);
     return resp.json();
+  },
+  async atualizar(id, payload) {
+    return fetch(`${API_URL}/progressos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
   },
 
   async salvar(payload) {
@@ -138,17 +160,20 @@ const DiarioAPI = {
 const DiarioController = {
   async init() {
     this.carregarUsuario();
-    state.hojeISO = await TimeService.getHojeISO();
+    const hoje = await TimeService.getHojeISO();
+    const queryData = getQueryData();
 
-    UI.dataInput.value = state.hojeISO;
-    UI.setDataTexto(TimeService.formatarTexto(state.hojeISO));
+    state.hojeISO = hoje;
+    state.diaSelecionado = queryData || hoje;
+
+    UI.dataInput.value = state.diaSelecionado;
+    UI.setDataTexto(TimeService.formatarTexto(state.diaSelecionado));
 
     this.renderSemana();
     await this.carregarDiarios();
     await this.carregarNumeroPagina();
-
-    this.selecionarDia(state.hojeISO);
     this.bind();
+    this.selecionarDia(state.diaSelecionado);
   },
 
   carregarUsuario() {
@@ -200,7 +225,9 @@ const DiarioController = {
 
     dots.forEach((dot) => {
       const data = dot.dataset.date;
-      const existe = state.diariosSemana.find((d) => d.data === data);
+      const existe = state.diariosSemana.find(
+        (d) => d.data.slice(0, 10) === data,
+      );
 
       if (existe) {
         UI.marcarDot(dot, "filled");
@@ -221,7 +248,9 @@ const DiarioController = {
     UI.dataInput.value = dataISO;
     UI.setDataTexto(TimeService.formatarTexto(dataISO));
 
-    const diario = state.diariosSemana.find((d) => d.data === dataISO);
+    const diario = state.diariosSemana.find(
+      (d) => d.data.slice(0, 10) === dataISO,
+    );
 
     if (diario) {
       UI.setTexto(diario.diario);
@@ -248,6 +277,9 @@ const DiarioController = {
 
   async salvar(e) {
     e.preventDefault();
+    const existente = state.diariosSemana.find(
+      (d) => d.data.slice(0, 10) === state.diaSelecionado,
+    );
 
     const payload = {
       pagina: Number(UI.pageNumber.textContent),
@@ -256,10 +288,19 @@ const DiarioController = {
       diario: UI.textarea.value,
       user_id: state.usuario.id,
     };
+    if (state.diaSelecionado !== state.hojeISO) {
+      alert("Você só pode escrever no diário de hoje.");
+      return;
+    }
 
     try {
-      await DiarioAPI.salvar(payload);
-      window.location.href = "perfil.html#perfil";
+      if (existente) {
+        await DiarioAPI.atualizar(existente.id, payload);
+      } else {
+        await DiarioAPI.salvar(payload);
+      }
+
+      window.location.href = "perfil.html#progresso";
     } catch (err) {
       console.error(err);
       alert("Erro ao salvar o diário.");

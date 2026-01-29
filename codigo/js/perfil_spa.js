@@ -1,13 +1,16 @@
 // =========================
 // APP BASE
 // =========================
+function parseLocalDate(iso) {
+  const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
 const App = {
   state: {
     user: null,
     posts: [],
     progressos: [],
   },
-
   api: {
     base:
       window.location.hostname === "localhost" ||
@@ -157,13 +160,23 @@ App.progresso = {
 
     App.state.progressos = lista
       .filter((p) => p.user_id == App.state.user.id)
-      .sort((a, b) => new Date(b.data) - new Date(a.data)); // mais recente primeiro
+      .sort((a, b) => parseLocalDate(b.data) - parseLocalDate(a.data));
+    // mais recente primeiro
 
     this.render();
   },
-
+  formatarData(dataISO) {
+    const d = parseLocalDate(dataISO);
+    return d.toLocaleDateString("pt-BR", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  },
   render() {
-    const grid = document.getElementById("progresso-grid");
+    const grid = document.getElementById("diarios-grid");
+
     grid.innerHTML = "";
 
     if (!App.state.progressos.length) {
@@ -175,21 +188,20 @@ App.progresso = {
       `;
       return;
     }
-
     App.state.progressos.forEach((p) => {
       grid.innerHTML += `
         <div class="card-resumo">
-          <div class="card-header">
-            <span>Diário</span>
-            <span>${p.dataFormatada}</span>
-          </div>
+         <div class="card-header">
+  <span class="card-date">${this.formatarData(p.data)}</span>
+</div>
+
 
           <div class="card-preview">
             ${p.diario.slice(0, 120)}${p.diario.length > 120 ? "..." : ""}
           </div>
 
           <a
-            href="pagina_progresso.html?data=${p.data}"
+            href="novo_diario.html?data=${p.data}"
             class="card-click-area"
           >
             Abrir
@@ -242,17 +254,21 @@ App.ui = {
     }
 
     // Dados
-    if (nome === "perfil") await App.perfil.carregar();
-    if (nome === "conteudo") await App.conteudo.carregar();
-    if (nome === "progresso") await App.progresso.carregar();
+    if (nome === "conteudo") await App.progresso.carregar();
+    if (nome === "progresso") {
+      // depois você coloca métricas aqui
+    }
   },
 };
 
 // =========================
 // BOOT (ESSA PARTE FALTAVA)
 // =========================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   App.ui.initTabs();
+
+  // Sempre carrega dados do perfil (avatar, nome, bio)
+  await App.perfil.carregar();
 
   const hash = window.location.hash.replace("#", "");
   const abaInicial =
