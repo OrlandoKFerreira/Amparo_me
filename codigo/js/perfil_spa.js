@@ -5,10 +5,12 @@ function parseLocalDate(iso) {
   const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
   return new Date(y, m - 1, d);
 }
+let PAGES;
+
 const App = {
   state: {
     user: null,
-    posts: [],
+
     progressos: [],
   },
   api: {
@@ -176,6 +178,7 @@ App.progresso = {
   },
   render() {
     const grid = document.getElementById("diarios-grid");
+    if (!grid) return;
 
     grid.innerHTML = "";
 
@@ -190,28 +193,25 @@ App.progresso = {
     }
     App.state.progressos.forEach((p) => {
       grid.innerHTML += `
-        <div class="card-resumo">
-         <div class="card-header">
-  <span class="card-date">${this.formatarData(p.data)}</span>
-</div>
+  <div class="card-resumo">
+    <div class="card-header">
+      <span class="card-date">${this.formatarData(p.data)}</span>
+    </div>
 
-
-          <div class="card-preview">
-            ${p.diario.slice(0, 120)}${p.diario.length > 120 ? "..." : ""}
-          </div>
-
-          <a
-            href="novo_diario.html?data=${p.data}"
-            class="card-click-area"
-          >
-            Abrir
-          </a>
-        </div>
-      `;
+    <div class="card-preview">
+      ${p.diario.slice(0, 120)}${p.diario.length > 120 ? "..." : ""}
+    </div>
+    <a
+      href="novo_diario.html?data=${p.data}"
+      class="card-click-area"
+    >
+      Abrir
+    </a>
+  </div>
+`;
     });
   },
 };
-
 // =========================
 // UI / SPA NAV
 // =========================
@@ -224,7 +224,6 @@ App.ui = {
       });
     });
   },
-
   async trocarAba(nome, atualizarHash = false) {
     // Esconde abas
     document
@@ -254,7 +253,9 @@ App.ui = {
     }
 
     // Dados
-    if (nome === "conteudo") await App.progresso.carregar();
+    if (nome === "conteudo" && PAGES.isPerfil) {
+      await App.progresso.carregar();
+    }
     if (nome === "progresso") {
       // depois você coloca métricas aqui
     }
@@ -266,10 +267,16 @@ App.ui = {
 // =========================
 document.addEventListener("DOMContentLoaded", async () => {
   App.ui.initTabs();
+  PAGES = {
+    isPerfil: !!document.getElementById("tab-perfil"),
+    isHome: !!document.getElementById("feed-posts"),
+    isDiario: !!document.getElementById("formDiario"),
+  };
 
   // Sempre carrega dados do perfil (avatar, nome, bio)
-  await App.perfil.carregar();
-
+  if (PAGES.isPerfil) {
+    await App.perfil.carregar();
+  }
   const hash = window.location.hash.replace("#", "");
   const abaInicial =
     hash === "conteudo" || hash === "progresso" ? hash : "perfil";

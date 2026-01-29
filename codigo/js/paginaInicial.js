@@ -1,59 +1,98 @@
 // /codigo/js/paginaInicial.js
+const state = {
+  page: 1,
+  limit: 6,
+  communityId: null,
+  loading: false,
+  end: false,
+};
 
-const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-  ? "http://localhost:3000"
-  : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app"
+const API_URL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:3000"
+    : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app";
 const PAGINA_FORM_POST = "criacaoDePost.html";
 
 var comunidades = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-  carregarListaTextos();
+  carregarFeed(true);
   carregarComunidades();
+  carregarAvatarSidebar();
 
   if (typeof initAcoesPosts === "function") {
     initAcoesPosts();
   }
 });
+function carregarAvatarSidebar() {
+  const json =
+    sessionStorage.getItem("usuarioLogado") ||
+    localStorage.getItem("usuarioLogado");
+
+  if (!json) return;
+
+  const user = JSON.parse(json);
+  const img = document.getElementById("sidebar-avatar");
+
+  if (img && user.foto) {
+    img.src = user.foto;
+  }
+}
 
 // carrega posts do JSON Server
-async function carregarListaTextos() {
-  const container = document.getElementById("lista-textos");
+async function carregarFeed(reset = false) {
+  if (state.loading || state.end) return;
+  state.loading = true;
+
+  const container = document.getElementById("feed-posts");
   if (!container) return;
 
-  try {
-    const resposta = await fetch(
-      `${API_URL}/posts?_sort=createdAt&_order=desc`
-    );
-    if (!resposta.ok) throw new Error("Erro ao buscar posts");
+  if (reset) {
+    state.page = 1;
+    state.end = false;
+    container.innerHTML = "";
+  }
 
-    const posts = await resposta.json();
+  try {
+    let url = `${API_URL}/posts?_sort=createdAt&_order=desc&_page=${state.page}&_limit=${state.limit}`;
+
+    if (state.communityId) {
+      url += `&comunidade=${state.communityId}`;
+    }
+
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error("Erro ao buscar feed");
+
+    const posts = await resp.json();
 
     if (!posts.length) {
-      container.innerHTML = `
-        <p class="sem-posts">
-          Nenhum post publicado ainda.
-        </p>
-      `;
+      state.end = true;
       return;
     }
 
-    container.innerHTML = posts.map(montarCardPost).join("");
-  } catch (erro) {
-    console.error(erro);
-    container.innerHTML = `
-      <p class="erro-posts">
-        Não foi possível carregar os posts.
-      </p>
-    `;
+    container.insertAdjacentHTML(
+      "beforeend",
+      posts.map(montarCardPost).join(""),
+    );
+
+    state.page++;
+  } catch (e) {
+    console.error(e);
+  } finally {
+    state.loading = false;
   }
+}
+function filtrarComunidade(id) {
+  state.communityId = id;
+  carregarFeed(true);
 }
 
 // carrega comunidades do JSON Server na sidebar
 async function carregarComunidades() {
   const lista = document.getElementById("lista-comunidades");
   if (!lista) return;
-  
+
   try {
     const resp = await fetch(`${API_URL}/communities`);
     if (!resp.ok) throw new Error("Erro ao buscar comunidades");
@@ -66,7 +105,7 @@ async function carregarComunidades() {
       return;
     }
 
-    pesquisarComunidades('')
+    pesquisarComunidades("");
   } catch (erro) {
     console.error("Erro ao carregar comunidades:", erro);
     lista.innerHTML =
@@ -78,9 +117,18 @@ function pesquisarComunidades(term) {
   const lista = document.getElementById("lista-comunidades");
   if (!lista) return;
 
-  const normalizedTerm = term.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  const normalizedTerm = term
+    .toUpperCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
-  const filteredComs = comunidades.filter(com => com.name.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(normalizedTerm));
+  const filteredComs = comunidades.filter((com) =>
+    com.name
+      .toUpperCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(normalizedTerm),
+  );
 
   lista.innerHTML = filteredComs.map(montarItemComunidade).join("");
 }
@@ -89,7 +137,8 @@ function pesquisarComunidades(term) {
 function montarItemComunidade(comunidade) {
   return `
     <li class="item-comunidade" data-id="${comunidade.id}">
-      <a href="paginaComunidade.html?id=${comunidade.id}">
+      <a href="#" onclick="filtrarComunidade(${comunidade.id}); return false;">
+
         <div class="item-comunidade-avatar"></div>
         <span class="comunidade-nome">${comunidade.name}</span>
       </a>
@@ -97,7 +146,6 @@ function montarItemComunidade(comunidade) {
   `;
 }
 
-// monta card de post na área principal
 // monta card de post na área principal
 function montarCardPost(post) {
   const capa =
@@ -126,4 +174,11 @@ function montarCardPost(post) {
     </article>
   `;
 }
+window.addEventListener("scroll", () => {
+  const nearBottom =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
 
+  if (nearBottom) {
+    carregarFeed();
+  }
+});
