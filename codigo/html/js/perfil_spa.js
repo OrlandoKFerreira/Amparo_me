@@ -59,15 +59,15 @@ if (!App.state.user?.id) {
 // =========================
 App.perfil = {
   async carregar() {
-    const usuarios = await App.api.get(
+    const lista = await App.api.get(
       `/usuarios?id=${encodeURIComponent(App.state.user.id)}`,
     );
+
+    const usuario = lista[0];
     if (!usuario) {
       alert("Usuário não encontrado");
       return;
     }
-
-    const usuario = usuarios[0];
 
     document.getElementById("user-name").textContent =
       usuario.nome || usuario.username || "Usuário";
