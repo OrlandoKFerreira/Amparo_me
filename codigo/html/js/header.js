@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const root = document.getElementById("header-root");
   if (!root) return;
 
-  const resp = await fetch("/codigo/componentes/header.html");
+  const resp = await fetch("/componentes/header.html");
   root.innerHTML = await resp.text();
 
   const json =
