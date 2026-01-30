@@ -1,4 +1,4 @@
-/* =========================
+/* =========================+
    DESIGN TOKENS
 ========================= */
 :root {
@@ -6,6 +6,7 @@
   --color-bg: #f7fcfa;
   --color-surface: #ffffff;
 
+  --color-primaryMenu: #abcebf;
   --color-primary: #82c09a;
   --color-primary-hover: #6fb28a;
 
@@ -64,10 +65,11 @@ a {
    HEADER GLOBAL
 ========================= */
 .site-header {
-  margin-bottom: var(--space-md);
   width: 100%;
   background-color: var(--color-header);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: none;
+  margin-bottom: 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .header-inner {
@@ -99,6 +101,26 @@ a {
   display: flex;
   align-items: center;
   line-height: 1;
+}
+.header-avatar {
+  position: relative;
+}
+
+.avatar-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--color-primaryMenu);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.avatar-menu button {
+  background: none;
+  border: 0;
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .logo-accent {

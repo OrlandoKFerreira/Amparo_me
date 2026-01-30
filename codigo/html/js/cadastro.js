@@ -170,6 +170,8 @@ async function handleSubmit(event) {
   let fotoUrl = "";
 
   try {
+    let fotoUrl;
+
     if (file) {
       fotoUrl = await uploadFotoCloudinary(file);
     }
@@ -181,7 +183,7 @@ async function handleSubmit(event) {
       telefone,
       senha,
       bio,
-      foto: fotoUrl,
+      ...(fotoUrl && { foto: fotoUrl }),
     };
 
     let resposta;
@@ -210,7 +212,7 @@ async function handleSubmit(event) {
         : `Cadastro criado! Bem-vindo(a), ${usuarioSalvo.nome}`,
     );
 
-    window.location.href = "/codigo/login.html";
+    window.location.href = "login.html";
   } catch (erro) {
     console.error(erro);
     alert("Erro ao salvar usuário ou imagem.");

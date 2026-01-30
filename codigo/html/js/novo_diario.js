@@ -296,7 +296,7 @@ const DiarioController = {
         await DiarioAPI.salvar(payload);
       }
 
-      window.location.href = "perfil.html#progresso";
+      window.location.href = "paginainicial.html#progresso";
     } catch (err) {
       console.error(err);
       alert("Erro ao salvar o diário.");
