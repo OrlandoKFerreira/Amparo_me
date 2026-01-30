@@ -1,5 +1,3 @@
-const API_URL = window.API_URL;
-
 document.addEventListener("DOMContentLoaded", async () => {
   const root = document.getElementById("header-root");
   if (!root) return;
