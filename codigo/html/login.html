@@ -104,6 +104,13 @@
     </div>
 
     <!-- SCRIPT -->
+    <script>
+      window.API_URL =
+        location.hostname === "localhost"
+          ? "http://localhost:3000"
+          : "https://amparo-me-ft0e.onrender.com";
+    </script>
+
     <script src="js/config.js"></script>
     <script src="js/login.js"></script>
   </body>
