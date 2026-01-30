@@ -1,35 +1,43 @@
-const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-  ? "http://localhost:3000"
-  : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app"
-let user_id = JSON.parse(sessionStorage.getItem("usuarioLogado")).id;
-let username = JSON.parse(sessionStorage.getItem("usuarioLogado")).nome;
+const API_URL = window.API_URL;
+const user = JSON.parse(sessionStorage.getItem("usuarioLogado"));
+
+if (!user) {
+  alert("Você precisa estar logado");
+  window.location.href = "login.html";
+}
+
+let user_id = user.id;
+let username = user.nome || "Usuário";
+
 const profilename = document.getElementById("profile-name");
 profilename.innerHTML = username;
 
 let userPosts = [];
 
 async function loadPosts() {
-    const res = await fetch(API_URL+'/posts');
-    const posts = await res.json();
+  const res = await fetch(API_URL + "/posts");
+  const posts = await res.json();
 
-    userPosts = posts.filter(post => post.user_id == user_id);
+  userPosts = posts.filter((post) => post.user_id == user_id);
 }
 
 async function buildPosts() {
-    const postList = document.getElementById("post-list");
+  const postList = document.getElementById("post-list");
 
-    postList.innerHTML = await Promise.all(
-        userPosts.map(async post => {
-            const likes = post.likes ?? 0;       
-            const dislikes = post.dislikes ?? 0; 
+  postList.innerHTML = await Promise.all(
+    userPosts.map(async (post) => {
+      const likes = post.likes ?? 0;
+      const dislikes = post.dislikes ?? 0;
 
-            const res = await fetch(API_URL+`/communities/${post.comunidade}`);
-            const comunidade = await res.json();
+      let nomeComunidade = "Sem comunidade";
 
-            const nomeComunidade = comunidade.name;
+      if (post.comunidade) {
+        const res = await fetch(API_URL + `/communities/${post.comunidade}`);
+        const comunidade = await res.json();
+        nomeComunidade = comunidade.name || nomeComunidade;
+      }
 
-
-            return `
+      return `
             <div class="post">
                 ${post.imageUrl ? `<img src="${post.imageUrl}">` : ""}
                 <div class="post-text">
@@ -37,9 +45,9 @@ async function buildPosts() {
                 <p>${post.text}</p>
                 </div>
                 <div class="post-meta">
-                <p>${nomeComunidade} ● ${post.categoria} ● ${new Date(post.createdAt).toLocaleString(
-                    "pt-BR"
-                )}</p>
+                <p>${nomeComunidade} ● ${post.categoria} ● ${new Date(
+                  post.createdAt,
+                ).toLocaleString("pt-BR")}</p>
                 </div>
                 <div class="post-vote">
                 <span class="post-like-count">
@@ -52,11 +60,11 @@ async function buildPosts() {
                 <a href="paginaArtigo.html?id=${post.id}" class="post-link">Ver mais</a>
             </div>
             `;
-        })
-    )
+    }),
+  );
 }
 
 window.onload = async function () {
-    await loadPosts();
-    buildPosts();
-}
+  await loadPosts();
+  buildPosts();
+};

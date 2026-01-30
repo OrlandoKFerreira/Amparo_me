@@ -1,10 +1,6 @@
 // /codigo/js/criarPost.js
 
-const API_URL =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-    ? "http://localhost:3000"
-    : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app";
+const API_URL = window.API_URL;
 
 const HOME_PAGE = "PaginaInicial.html"; // página inicial
 const ARTICLE_PAGE = "paginaArtigo.html"; // página do artigo

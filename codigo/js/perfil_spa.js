@@ -1,6 +1,7 @@
 // =========================
 // APP BASE
 // =========================
+
 function parseLocalDate(iso) {
   const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
   return new Date(y, m - 1, d);
@@ -14,12 +15,7 @@ const App = {
     progressos: [],
   },
   api: {
-    base:
-      window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1"
-        ? "http://localhost:3000"
-        : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app",
-
+    base: window.API_URL || "http://localhost:3000",
     get(path) {
       return fetch(this.base + path).then((r) => r.json());
     },
@@ -63,7 +59,15 @@ if (!App.state.user?.id) {
 // =========================
 App.perfil = {
   async carregar() {
-    const usuario = await App.api.get(`/usuarios/${App.state.user.id}`);
+    const usuarios = await App.api.get(
+      `/usuarios?id=${encodeURIComponent(App.state.user.id)}`,
+    );
+    if (!usuario) {
+      alert("Usuário não encontrado");
+      return;
+    }
+
+    const usuario = usuarios[0];
 
     document.getElementById("user-name").textContent =
       usuario.nome || usuario.username || "Usuário";

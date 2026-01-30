@@ -1,4 +1,5 @@
 // /codigo/js/paginaInicial.js
+const API_URL = window.API_URL;
 const state = {
   page: 1,
   limit: 6,
@@ -7,11 +8,6 @@ const state = {
   end: false,
 };
 
-const API_URL =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-    ? "http://localhost:3000"
-    : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app";
 const PAGINA_FORM_POST = "criacaoDePost.html";
 
 var comunidades = {};

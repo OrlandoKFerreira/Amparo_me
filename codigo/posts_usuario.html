@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Perfil de Usuário</title>
-    <link rel="stylesheet" href="css/pagina_progresso.css">
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/pagina_progresso.css" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
     <header class="site-header">
       <img src="img/logo.png" alt="Amparo.Me" class="site-logo" />
       <nav class="site-nav">
@@ -20,21 +20,35 @@
       </nav>
     </header>
     <div class="profile-container">
-        <div class="profile-header">
-            <img src="img/img_perfil.png" alt="Foto de Perfil de Aurora" class="profile-pic" id="profile-pic">
-            <h2 id="profile-name"></h2>
-            <nav class="main-nav">
-                <button onclick="window.location.href='pagina_perfil.html'">Editar Perfil</button>
-                <button class="active">Meu Conteúdo</button>
-                <button onclick="window.location.href='pagina_progresso_inicio.html'">Progresso</button>
-            </nav>
-        </div>
+      <div class="profile-header">
+        <img
+          src="img/img_perfil.png"
+          alt="Foto de Perfil de Aurora"
+          class="profile-pic"
+          id="profile-pic"
+        />
+        <h2 id="profile-name"></h2>
+        <nav class="main-nav">
+          <button onclick="window.location.href = 'pagina_perfil.html'">
+            Editar Perfil
+          </button>
+          <button class="active">Meu Conteúdo</button>
+          <button
+            onclick="window.location.href = 'pagina_progresso_inicio.html'"
+          >
+            Progresso
+          </button>
+        </nav>
+      </div>
 
-        <main class="post-list" id="post-list">
-        </main>
+      <main class="post-list" id="post-list"></main>
     </div>
 
+    <script src="/codigo/js/config.js"></script>
     <script src="js/posts_usuario.js"></script>
-    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://kit.fontawesome.com/930963f86e.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/cadastroComunidade.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/cadastroComunidade.css" />
     <title>Amparo.Me</title>
-</head>
-<body>
-     <header class="header">
+  </head>
+  <body>
+    <header class="header">
       <img src="img/logo.png" alt="Amparo.Me" width="200px" />
       <nav>
-       <a href="PaginaInicial.html" title="Pagina inicial">
+        <a href="PaginaInicial.html" title="Pagina inicial">
           <i class="fa-solid fa-house-chimney"></i>
         </a>
         <a href="posts_usuario.html" title="Meu Perfil"
@@ -20,28 +20,36 @@
       </nav>
     </header>
     <main>
-        <h1>Comunidade</h1>
-        <div id="form-comunidade">
-            <div id="nometopicos">
-                <label>Nome da Comunidade</label>
-                <input type="text" id="input-name">
-                <label>Tópicos e tags</label>
-                <input type="text" id="input-tags">
-            </div>
-            <div id="imagem-comunidade">
-                <label>Imagem</label>
-                <img src="https://placehold.co/400x400">
-                <input type="text" id="input-img" placeholder="Insira a URL da imagem...">
-                <button id="send-image">Confirmar Imagem</button>
-            </div>
-            <div id="descricao">
-                <label>Descrição</label>
-                <textarea id="input-description"></textarea>
-            </div>
-            <button id="btn-criar">Criar</button>
+      <h1>Comunidade</h1>
+      <div id="form-comunidade">
+        <div id="nometopicos">
+          <label>Nome da Comunidade</label>
+          <input type="text" id="input-name" />
+          <label>Tópicos e tags</label>
+          <input type="text" id="input-tags" />
         </div>
+        <div id="imagem-comunidade">
+          <label>Imagem</label>
+          <img src="https://placehold.co/400x400" />
+          <input
+            type="text"
+            id="input-img"
+            placeholder="Insira a URL da imagem..."
+          />
+          <button id="send-image">Confirmar Imagem</button>
+        </div>
+        <div id="descricao">
+          <label>Descrição</label>
+          <textarea id="input-description"></textarea>
+        </div>
+        <button id="btn-criar">Criar</button>
+      </div>
     </main>
     <script src="js/cadastroComunidade.js"></script>
-    <script src="https://kit.fontawesome.com/930963f86e.js" crossorigin="anonymous"></script>
-</body>
+    <script src="/codigo/js/config.js"></script>
+    <script
+      src="https://kit.fontawesome.com/930963f86e.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

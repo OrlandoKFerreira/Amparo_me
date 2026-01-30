@@ -1,0 +1,9 @@
+{
+  "name": "amparo-backend",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}

@@ -1,7 +1,5 @@
 // URL base do JSON Server
-const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-  ? "http://localhost:3000"
-  : "https://plf-es-2025-2-ti1-5567100-amparo-me-production.up.railway.app"
+const API_URL = window.API_URL;
 
 // Tenta pegar usuário logado da SESSÃO
 const usuarioLogadoJSON = sessionStorage.getItem("usuarioLogado");
@@ -83,7 +81,7 @@ function montarPerguntas() {
             <span class="emoji">${item.emoji}</span>
             <span class="valor">${item.valor}</span>
           </button>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -110,7 +108,7 @@ function aplicarRegistroNoFormulario(registro) {
     respostas[perguntaId] = valor;
 
     const opcoesDiv = perguntasContainer.querySelector(
-      `.opcoes[data-pergunta-id="${perguntaId}"]`
+      `.opcoes[data-pergunta-id="${perguntaId}"]`,
     );
     if (!opcoesDiv) return;
 
@@ -119,7 +117,7 @@ function aplicarRegistroNoFormulario(registro) {
     });
 
     const btnSelecionado = opcoesDiv.querySelector(
-      `.emoji-btn[data-valor="${valor}"]`
+      `.emoji-btn[data-valor="${valor}"]`,
     );
     if (btnSelecionado) {
       btnSelecionado.classList.add("selecionado");
@@ -151,8 +149,8 @@ async function verificarRegistroHoje() {
   try {
     const resp = await fetch(
       `${API_URL}/registrosHumor?usuarioId=${encodeURIComponent(
-        usuarioLogado.id
-      )}&data=${encodeURIComponent(dataHoje)}&_limit=1`
+        usuarioLogado.id,
+      )}&data=${encodeURIComponent(dataHoje)}&_limit=1`,
     );
 
     if (!resp.ok) throw new Error("Erro ao verificar registro de humor.");
@@ -164,7 +162,7 @@ async function verificarRegistroHoje() {
       const registro = registros[0];
       setStatus(
         "Você já registrou seu humor hoje. Estas foram suas respostas:",
-        "info"
+        "info",
       );
       aplicarRegistroNoFormulario(registro);
       desativarInteracao();
@@ -176,7 +174,7 @@ async function verificarRegistroHoje() {
     console.error(error);
     setStatus(
       "Não foi possível verificar seus registros de humor. Tente novamente mais tarde.",
-      "error"
+      "error",
     );
   }
 }
@@ -209,14 +207,14 @@ form.addEventListener("submit", async (event) => {
   if (jaRespondeuHoje) {
     setStatus(
       "Você já respondeu seu humor hoje. Use o botão Próximo para continuar.",
-      "error"
+      "error",
     );
     return;
   }
 
   // Verifica se todas as perguntas foram respondidas
   const todasRespondidas = perguntas.every(
-    (p) => respostas[p.id] !== undefined
+    (p) => respostas[p.id] !== undefined,
   );
 
   if (!todasRespondidas) {
@@ -262,7 +260,7 @@ form.addEventListener("submit", async (event) => {
     console.error(error);
     setStatus(
       "Erro ao salvar. Verifique o JSON Server e tente novamente.",
-      "error"
+      "error",
     );
     form.querySelector('button[type="submit"]').disabled = false;
   }
