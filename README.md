@@ -25,6 +25,6 @@ Este projeto é disponibilizado sob a **MIT License** para fins educacionais, de
 
 ## 🚀 Live Demo
 
-amparo-sand.vercel.app
+https://amparo-sand.vercel.app
 
 Orlando Kelvin Ferreira
