@@ -148,7 +148,7 @@ async function verificarRegistroHoje() {
 
   try {
     const resp = await fetch(
-      `${API_URL}/registrosHumor?usuarioId=${encodeURIComponent(
+      `${API_URL}/registrosHumor?user_id=${encodeURIComponent(
         usuarioLogado.id,
       )}&data=${encodeURIComponent(dataHoje)}&_limit=1`,
     );
@@ -157,8 +157,11 @@ async function verificarRegistroHoje() {
 
     const registros = await resp.json();
 
-    if (registros.length > 0) {
-      // já respondeu hoje → mostra o que foi respondido e trava
+    if (
+      registros.length > 0 &&
+      Array.isArray(registros[0].respostas) &&
+      registros[0].respostas.length > 0
+    ) {
       const registro = registros[0];
       setStatus(
         "Você já registrou seu humor hoje. Estas foram suas respostas:",
@@ -222,12 +225,12 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 
-  const usuarioId = usuarioLogado.id;
+  const user_id = usuarioLogado.id;
   const agora = new Date();
   const dataDia = dataHoje || getDataHoje();
 
   const payload = {
-    usuarioId,
+    user_id: usuarioLogado.id,
     data: dataDia, // yyyy-mm-dd
     dataHora: agora.toISOString(),
     respostas: perguntas.map((p) => ({

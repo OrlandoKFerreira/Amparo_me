@@ -99,7 +99,7 @@ async function receberHumores() {
     const res = await fetch(API_URL + "/registrosHumor");
     const hum = await res.json();
 
-    humores = hum.filter((humo) => humo.usuarioId == user_id);
+    humores = hum.filter((humo) => humo.user_id == user_id);
     humores = humores.filter((hum) => hum.data == diaAtualKey);
   } catch (e) {
     console.error(e);

@@ -29,18 +29,28 @@ function limparUsuarioLogado() {
 function exigirLogin() {
   const path = window.location.pathname.split("/").pop() || "";
   if (PUBLIC_PAGES.includes(path)) {
-    // páginas públicas não precisam de login
     return;
   }
 
-  const usuario = obterUsuarioLogado();
+  const usuario = (() => {
+    try {
+      const raw =
+        sessionStorage.getItem("usuarioLogado") ||
+        localStorage.getItem("usuarioLogado");
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (e) {
+      console.error("Erro ao ler usuarioLogado:", e);
+      return null;
+    }
+  })();
+
   if (!usuario) {
     const redirect = encodeURIComponent(window.location.href);
     window.location.href = `${LOGIN_PAGE}?redirect=${redirect}`;
     return;
   }
 
-  // se estiver logado, atualiza header
   mostrarUsuarioNoHeader(usuario);
 }
 

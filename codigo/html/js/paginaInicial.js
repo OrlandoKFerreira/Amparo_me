@@ -2,7 +2,7 @@
 const API_URL = window.API_URL;
 const state = {
   page: 1,
-  limit: 6,
+  limit: 12,
   communityId: null,
   loading: false,
   end: false,
@@ -64,6 +64,14 @@ async function carregarFeed(reset = false) {
 
     if (!posts.length) {
       state.end = true;
+      const container = document.getElementById("feed-posts");
+      if (container) {
+        container.insertAdjacentHTML(
+          "beforeend",
+          '<div class="fim-feed">Você chegou ao fim do feed</div>',
+        );
+      }
+
       return;
     }
 
@@ -170,11 +178,19 @@ function montarCardPost(post) {
     </article>
   `;
 }
-window.addEventListener("scroll", () => {
-  const nearBottom =
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+let scrollTimeout = null;
 
-  if (nearBottom) {
-    carregarFeed();
-  }
+window.addEventListener("scroll", () => {
+  if (scrollTimeout) return;
+
+  scrollTimeout = setTimeout(() => {
+    const nearBottom =
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+
+    if (nearBottom) {
+      carregarFeed();
+    }
+
+    scrollTimeout = null;
+  }, 200);
 });

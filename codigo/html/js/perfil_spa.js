@@ -260,7 +260,7 @@ App.ui = {
     if (nome === "conteudo" && PAGES.isPerfil) {
       await App.progresso.carregar();
     }
-    if (nome === "progresso") {
+    if (nome === "progresso" && PAGES.isPerfil) {
       // depois você coloca métricas aqui
     }
   },

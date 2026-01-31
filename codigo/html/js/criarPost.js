@@ -9,7 +9,7 @@ const USER_ID = JSON.parse(sessionStorage.getItem("usuarioLogado")).id; //usuari
 
 // vamos guardar o post atual quando estiver em modo edição
 let postAtual = null;
-let imagemBase64 = "";
+let imageFile = null;
 
 function getQueryParam(name) {
   const params = new URLSearchParams(window.location.search);
@@ -36,18 +36,14 @@ function setActiveTab(tabName) {
 function initImagePreview() {
   const input = document.getElementById("cp-imagem");
   const preview = document.getElementById("cp-preview");
+
   if (!input || !preview) return;
 
   input.addEventListener("change", () => {
     const file = input.files[0];
     if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      imagemBase64 = reader.result;
-      preview.innerHTML = `<img src="${imagemBase64}">`;
-    };
-    reader.readAsDataURL(file);
+    imageFile = file;
+    preview.innerHTML = `<img src="${URL.createObjectURL(file)}">`;
   });
 }
 
@@ -120,7 +116,7 @@ async function carregarPostParaEdicao(id) {
     img.style.borderRadius = "8px";
     preview.appendChild(img);
 
-    // 🔥 mantém a imagem original se o usuário não trocar
+    // mantém a imagem original se o usuário não trocar
     imagemBase64 = imgUrl;
   }
 
@@ -137,9 +133,42 @@ async function carregarPostParaEdicao(id) {
   // devolve o post pra quem chamou
   return post;
 }
+async function uploadParaCloudinary(file) {
+  const CLOUD_NAME = "dhgbvydnm";
+  const UPLOAD_PRESET = "amparo_unsigned";
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", UPLOAD_PRESET);
+
+  const resp = await fetch(
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+    {
+      method: "POST",
+      body: formData,
+    },
+  );
+
+  const text = await resp.text();
+  console.log("Cloudinary status:", resp.status);
+  console.log("Cloudinary response:", text);
+
+  if (!resp.ok) {
+    throw new Error(text);
+  }
+
+  const data = JSON.parse(text);
+  return data.secure_url;
+}
 
 // ---- Criar / Atualizar post ----
 async function salvarPost(idExistente) {
+  const btn = document.getElementById("cp-publicar");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Publicando...";
+  }
+
   const comunidadeEl = document.getElementById("comunidade");
   const tituloEl = document.getElementById("titulo");
   const categoriaEl = document.getElementById("categoria");
@@ -155,17 +184,42 @@ async function salvarPost(idExistente) {
   const categoria = categoriaEl?.value || "";
   const texto = textoEl?.value.trim() || "";
   const link = linkEl?.value.trim() || "";
-  const imagem = imagemBase64 || "";
 
   // validações mínimas
-  if (!titulo) return alert("Preencha o título do post.");
-  if (!texto && !imagem && !link)
+  if (!titulo) {
+    const btn = document.getElementById("cp-publicar");
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "Publicar";
+    }
+    return alert("Preencha o título do post.");
+  }
+
+  if (!texto && !imagem && !link) {
+    const btn = document.getElementById("cp-publicar");
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "Publicar";
+    }
     return alert("Adicione texto, imagem ou link ao post.");
+  }
 
   // tipo automático
   let tipo = "texto";
-  if (imagem) tipo = "imagem";
-  else if (link) tipo = "link";
+  let imageUrl = postAtual?.imageUrl || postAtual?.imagem || "";
+
+  if (imageFile) {
+    try {
+      imageUrl = await uploadParaCloudinary(imageFile);
+    } catch (e) {
+      const btn = document.getElementById("cp-publicar");
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Publicar";
+      }
+      return alert("Falha ao enviar a imagem. Tente novamente.");
+    }
+  }
 
   const payload = {
     comunidade,
@@ -173,7 +227,7 @@ async function salvarPost(idExistente) {
     tipo,
     title: titulo,
     text: texto,
-    imageUrl: imagem,
+    imageUrl: imageUrl,
     link,
     user_id: USER_ID,
     likes,
@@ -194,11 +248,24 @@ async function salvarPost(idExistente) {
 
   const resp = await fetch(url, {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "x-user-id": USER_ID,
+    },
     body: JSON.stringify(payload),
   });
 
-  if (!resp.ok) throw new Error("Erro ao salvar post");
+  if (!resp.ok) {
+    const btn = document.getElementById("cp-publicar");
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "Publicar";
+    }
+    return alert(
+      "Voce postou rapido demais. Aguarde alguns minutos antes de tentar novamente.",
+    );
+    throw new Error("Erro ao salvar o post");
+  }
 
   const saved = await resp.json();
   const idFinal = idExistente || saved.id;

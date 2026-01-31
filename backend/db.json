@@ -1,28 +1,128 @@
 {
   "usuarios": [
     {
-      "id": "9932",
-      "nome": "Orlando ferreira",
-      "username": "Orlando",
+      "nome": "Orlando Kelvin Ferreira",
+      "username": "orlando",
       "email": "orlando@email.com",
       "telefone": "3199999999",
-      "senha": "1234",
-      "bio": "Me chamo Orlando",
-      "foto": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769649063/frzksk5i831moisdnmdr.jpg"
+      "senha": "1234!",
+      "bio": "Oi, meu nome e Orlando!",
+      "foto": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769891759/azz8gh45wc59gtsnqkue.png",
+      "id": 1
     },
     {
-      "id": "d084",
-      "nome": "orlando2",
-      "username": "Orlando2",
+      "nome": "Orlando Kelvin Ferreira2",
+      "username": "orlando2",
       "email": "orlando2@email.com",
       "telefone": "3199999999",
       "senha": "1234",
-      "bio": "Orlando2",
-      "foto": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769723405/zaoiia2uclwjavh7rkrf.jpg"
+      "bio": "Conta 2 para testes",
+      "foto": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769896022/fgcidltg097jwr1dfgil.png",
+      "id": 2
     }
   ],
-  "registrosHumor": [],
+  "registrosHumor": [
+    {
+      "user_id": 1,
+      "data": "2026-01-31",
+      "dataHora": "2026-01-31T22:55:38.412Z",
+      "respostas": [
+        {
+          "perguntaId": "geral",
+          "valor": 5
+        },
+        {
+          "perguntaId": "sono",
+          "valor": 5
+        },
+        {
+          "perguntaId": "energia",
+          "valor": 5
+        },
+        {
+          "perguntaId": "ansiedade",
+          "valor": 5
+        },
+        {
+          "perguntaId": "social",
+          "valor": 5
+        }
+      ],
+      "id": 1
+    },
+    {
+      "user_id": 4,
+      "data": "2026-01-31",
+      "dataHora": "2026-01-31T22:55:56.123Z",
+      "respostas": [
+        {
+          "perguntaId": "geral",
+          "valor": 5
+        },
+        {
+          "perguntaId": "sono",
+          "valor": 5
+        },
+        {
+          "perguntaId": "energia",
+          "valor": 3
+        },
+        {
+          "perguntaId": "ansiedade",
+          "valor": 3
+        },
+        {
+          "perguntaId": "social",
+          "valor": 3
+        }
+      ],
+      "id": 2
+    }
+  ],
   "communities": [],
-  "posts": [],
+  "posts": [
+    {
+      "comunidade": null,
+      "categoria": "Ansiedade",
+      "tipo": "texto",
+      "title": "TOMAS",
+      "text": "O cuidado com o outro costuma revelar um paradoxo humano: buscamos preservar a própria lógica e conforto, mas é no encontro com a vulnerabilidade alheia que nossa ética se torna visível. A psicologia chama isso de empatia relacional — a capacidade de sair do centro da própria experiência para reconhecer o valor simbólico que o outro ocupa na nossa história e na dos que nos cercam.\n\nNa filosofia, especialmente nas tradições do cuidado e da alteridade, o “bem” não nasce da eficiência ou da conveniência, mas da atenção ao vínculo. Decidir por alguém — seja uma pessoa, seja um animal que compartilha nossa vida — não é apenas um ato prático, é um gesto moral. Ele comunica quem somos e quais relações escolhemos preservar. Quando a fragilidade entra em cena, o critério deixa de ser “o que faz mais sentido” e passa a ser “o que mantém o sentido”.\n\nHá também uma dimensão de memória afetiva. Vínculos não desaparecem com a ausência física; eles permanecem como estruturas emocionais que organizam o presente. Cuidar de quem permanece é, muitas vezes, uma forma silenciosa de honrar quem partiu. Nesse movimento, o outro deixa de ser apenas um ser que demanda atenção e se torna um espelho daquilo que valorizamos: companhia, lealdade, continuidade, presença.\n\nTalvez a questão central não seja abandonar a razão, mas ampliá-la. Uma racionalidade que inclua o afeto entende que o bem-estar não é individual, mas compartilhado. Respeitar a vontade e a experiência daqueles que vivem conosco — humanos ou não — é reconhecer que nossas decisões nunca são solitárias. Elas sempre atravessam histórias, memórias e laços que nos definem tanto quanto qualquer escolha consciente.",
+      "imageUrl": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769892282/nvio9bfeoq7rxv4kixmk.png",
+      "link": "",
+      "user_id": 1,
+      "likes": 0,
+      "dislikes": 0,
+      "createdAt": "2026-01-31T20:41:33.769Z",
+      "id": 1
+    },
+    {
+      "comunidade": null,
+      "categoria": "Ansiedade",
+      "tipo": "texto",
+      "title": "VIDA",
+      "text": "A comparação costuma enganar. O que vemos no outro é apenas um recorte: histórias, dores e formas de felicidade são diferentes e não podem ser medidas pela mesma régua. Quando tentamos usar critérios externos para avaliar a própria vida, perdemos o sentido daquilo que é singular em nós.\n\nAutoconhecimento é perceber quem somos de verdade — o que nos machuca, o que nos fortalece e o que realmente nos traz prazer. Muitas vezes, o pensamento racional confunde desejo autêntico com expectativas aprendidas, fazendo parecer satisfatório aquilo que apenas “deveria” ser.\n\nTalvez viver melhor não seja comparar, medir ou justificar, mas escutar. Respeitar os próprios limites, reconhecer os vínculos que nos formam e aceitar que cada existência segue um ritmo e um sentido próprios.",
+      "imageUrl": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769892804/jmwafxbqah9yckwbcchw.png",
+      "link": "",
+      "user_id": 1,
+      "likes": 1,
+      "dislikes": 0,
+      "createdAt": "2026-01-31T20:53:26.639Z",
+      "id": 2
+    },
+    {
+      "comunidade": null,
+      "categoria": "Ansiedade",
+      "tipo": "texto",
+      "title": "REFLEXO",
+      "text": "A fuga da própria origem revela uma tentativa de escapar do que nos moldou. Muitas vezes rejeitamos o passado — traumas, carências, contextos — na esperança de construir uma identidade “mais limpa” ou desejável.\n\nMas essa negação costuma gerar vazio. Ao nos afastarmos da nossa história, perdemos as referências para nos situar no presente. Não ficamos sem um “eu”, e sim sem aceitar o “eu” que já existe, com suas contradições e complexidades.",
+      "imageUrl": "https://res.cloudinary.com/dhgbvydnm/image/upload/v1769892901/vpqqm5idecdol5bxybpx.png",
+      "link": "",
+      "user_id": 1,
+      "likes": 2,
+      "dislikes": 0,
+      "createdAt": "2026-01-31T20:55:03.913Z",
+      "id": 3
+    }
+  ],
   "progressos": []
 }

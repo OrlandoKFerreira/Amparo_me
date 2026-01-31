@@ -126,15 +126,18 @@ const TimeService = {
 // =========================
 const DiarioAPI = {
   async listar(userId) {
-    const resp = await fetch(`${API_URL}/progressos?user_id=${userId}`);
-    return resp.json();
+    const resp = await fetch(`${API_URL}/progressos`);
+    const lista = await resp.json();
+    return lista.filter((d) => String(d.user_id) === String(userId));
   },
   async atualizar(id, payload) {
     return fetch(`${API_URL}/progressos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "x-user-id": state.usuario.id,
       },
+
       body: JSON.stringify(payload),
     });
   },
@@ -144,7 +147,9 @@ const DiarioAPI = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-user-id": state.usuario.id,
       },
+
       body: JSON.stringify(payload),
     });
   },

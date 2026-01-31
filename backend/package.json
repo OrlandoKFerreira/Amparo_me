@@ -4,6 +4,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "express-rate-limit": "^8.2.1",
     "json-server": "^0.17.4"
   }
 }
